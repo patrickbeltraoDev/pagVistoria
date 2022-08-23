@@ -1,0 +1,12 @@
+title-pag{
+    font-family: 'Oswald', sans-serif;
+    font-size: 1em;
+    letter-spacing: 1.1px;
+}
+
+.title{
+    margin-top: 20px;
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: center;
+}

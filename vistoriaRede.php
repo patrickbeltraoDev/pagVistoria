@@ -55,26 +55,47 @@
             </div>
 
             <form action="backVistoria.php" method="post" class="">
-                <div class="form-floating mb-3">
+                <div class="row">
+                    <div class="col-6 div-inp">
+                                                            <!-- UF -->
+                        <label for="sigla_unidade_federativa" class="bg-danger">UF</label>
+                        <?php
+                            $sql1 = "SELECT sigla_unidade_federativa from pci.tbl_servicos_associados_rede GROUP BY sigla_unidade_federativa";
+                            $qr_1 = mysql_query($sql1) or die(error_msg(mysql_error(), $sql1));
+                            while($result_uf = mysql_fetch_assoc($qr_1)){
+                                $v_filtros['sigla_unidade_federativa'][] = $result_uf['sigla_unidade_federativa'];
+                            }
+                            foreach ($v_filtros['sigla_unidade_federativa'] as $key) {
+                                $ar = $tag_filtros['sigla_unidade_federativa'] .= "<option value='$key' " . (in_array($key, $_REQUEST['sigla_unidade_federativa']) ? 'selected' : '') . ">$key</option>";
+                            }
+                        ?>
+                        <select name='sigla_unidade_federativa[]'  id="sigla_unidade_federativa" title="UF" required>
+                            <?php echo $tag_filtros['sigla_unidade_federativa']; ?>
+                        </select>
+                    </div>
 
-                    <?php
-                        $sql7 = "SELECT sigla_unidade_federativa from pci.tbl_servicos_associados_rede GROUP BY sigla_unidade_federativa";
-                        $qr_7 = mysql_query($sql7) or die(error_msg(mysql_error(), $sql7));
-                        while($result_uf = mysql_fetch_assoc($qr_7)){
-                            $v_filtros['sigla_unidade_federativa'][] = $result_uf['sigla_unidade_federativa'];
-                        }
-                        foreach ($v_filtros['sigla_unidade_federativa'] as $key) {
-                            $ar = $tag_filtros['sigla_unidade_federativa'] .= "<option value='$key' " . (in_array($key, $_REQUEST['sigla_unidade_federativa']) ? 'selected' : '') . ">$key</option>";
-                        }
-                    ?>
-                    <label for="sigla_unidade_federativa">UF</label>
-                    <select name='sigla_unidade_federativa[]' class="col-md-6" id="sigla_unidade_federativa" title="UF" required>
-                        <?php echo $tag_filtros['sigla_unidade_federativa']; ?>
-                    </select>
-                    <!-- <input type="text" class="form-control" id="uf" name="uf"> -->
+                    <div class="col-6  div-inp">
+                                                        <!-- CIDADE -->
+                        <label for="nome_localidade" class="bg-danger">CIDADE</label>
+                        <?php
+                            $sql2 = "SELECT nome_localidade from pci.tbl_servicos_associados_rede GROUP BY nome_localidade";
+                            $qr_2 = mysql_query($sql2) or die(error_msg(mysql_error(), $sql2));
+                            while ($result_municipio = mysql_fetch_assoc($qr_2) ){
+                                $v_filtros['nome_localidade'][] = $result_municipio['nome_localidade'];
+                            }
+                            foreach ($v_filtros['nome_localidade'] as $key) {
+                                $ar = $tag_filtros['nome_localidade'] .= "<option value='$key' " . (in_array($key, $_REQUEST['nome_localidade']) ? 'selected' : '') . ">$key</option>";
+                            }
+                        ?>
+
+                        <select name='nome_localidade[]' id="nome_localidade" required title="CIDADE">
+                            <?php echo $tag_filtros['nome_localidade']; ?>
+                        </select> 
+                    </div>
+                    
                 </div>
 
-                <div class="form-floating mb-3">
+                <!-- <div class="form-floating mb-3">
                     <label for="cidade">CIDADE</label>
                     <input type="text" class="form-control" id="cidade" name="cidade">
                 </div>
@@ -89,7 +110,7 @@
                 <div class="form-floating mb-3">
                     <label for="cdo">INFORME CDO DE REFERÊNCIA</label>
                     <input type="text" class="form-control" id="cdo" name="cdo">
-                </div>
+                </div> -->
 
 
 

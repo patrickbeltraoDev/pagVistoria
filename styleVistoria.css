@@ -9,4 +9,15 @@ title-pag{
     margin-bottom: 40px;
     display: flex;
     justify-content: center;
+    
+}
+
+.div-inp{
+    display: flex; 
+    flex-direction: column; 
+    text-align: center;
+}
+
+.text{
+    text-align: center;
 }

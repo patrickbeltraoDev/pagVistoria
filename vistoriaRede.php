@@ -53,10 +53,13 @@
             <div class="title">
                 <h2 class="title-pag" >VISTORIA DE REDE OFENSORA DE ROMPIMENTO DE DROP E CABO</h2>
             </div>
+            <div class="title">
+                <h3 class="title-pag" >CADASTRO - [<span>RCO</span>]</h2>
+            </div>
 
             <form action="backVistoria.php" method="post" class="">
                 <div class="row">
-                    <div class="col-6 div-inp">
+                    <div class="col-sm-12 col-md-6 div-inp">
                                                             <!-- UF -->
                         <label for="sigla_unidade_federativa" class="bg-danger">UF</label>
                         <?php
@@ -74,7 +77,7 @@
                         </select>
                     </div>
 
-                    <div class="col-6  div-inp">
+                    <div class="col-sm-12 col-md-6  div-inp">
                                                         <!-- CIDADE -->
                         <label for="nome_localidade" class="bg-danger">CIDADE</label>
                         <?php
@@ -97,12 +100,12 @@
                                                    
                 <div class="row" style="margin-top: 20px">
                                                         <!-- ENDEREÇO -->
-                    <div class="col-6 div-inp">
+                    <div class="col-sm-12 col-md-6 div-inp">
                         <label for="endereco" class="bg-danger">ENDEREÇO</label>
                         <input type="text" class="form-control" id="endereco" name="endereco">
                     </div>
                                                         <!-- ACESSO GPON REFERÊNCIA -->
-                    <div class="col-6 div-inp">
+                    <div class="col-sm-12 col-md-6 div-inp">
                         <label for="acessoGP" class="bg-danger">INFORME ACESSO GPON DE REFERÊNCIA</label>
                         <input type="text" class="form-control" id="acessoGP" name="acessoGP">
                     </div>
@@ -110,12 +113,12 @@
                 
                 <div class="row" style="margin-top: 20px">
                                                     <!-- CDO REFERÊNCIA -->
-                    <div class="col-6 div-inp">
+                    <div class="col-sm-12 col-md-6 div-inp">
                         <label for="cdo" class="bg-danger">INFORME CDO DE REFERÊNCIA</label>
                         <input type="text" class="form-control" id="cdo" name="cdo">
                     </div>
                                  
-                    <div class="col-6  div-inp">
+                    <div class="col-sm-12 col-md-6  div-inp">
                                                     <!-- PROBLEMA A SER INVESTIGADO -->
                         <label for="vistoriaProblema" class="bg-danger">PROBLEMA A SER INVESTIGADO</label>
                             <?php
@@ -135,7 +138,18 @@
                     </div>
                 </div>
 
-
+                <div class="row" style="margin-top: 20px">
+                                                    <!-- ESCOLHA DA ÁREA QUE VAI FAZER A TRATATIVA -->
+                    <div class="col-sm-12 col-md-6 div-inp">
+                        <label for="areaVistoria" class="bg-danger">ÁREA QUE VAI EXECUTAR A VISTORIA</label>
+                        <select class="form-select form-select-lg mb-3" name="areaVistoria" aria-label=".form-select-lg example">
+                            <option selected>Escolha a área</option>
+                            <option value="1">MANUTENÇÃO</option>
+                            <option value="2">HOME CONNECT</option>
+                        </select>
+                    </div>
+                                
+                </div>
 
             </form>
 

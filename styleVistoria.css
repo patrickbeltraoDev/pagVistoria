@@ -1,7 +1,11 @@
-title-pag{
+body{
     font-family: 'Oswald', sans-serif;
-    font-size: 1em;
     letter-spacing: 1.1px;
+    font-weight: 700;
+    
+}
+title-pag{
+    font-size: 1em;
 }
 
 .title{
@@ -9,7 +13,11 @@ title-pag{
     margin-bottom: 40px;
     display: flex;
     justify-content: center;
-    
+}
+
+.title span{
+    color: #dc3545;
+    font-size: 1em;
 }
 
 .div-inp{
@@ -23,8 +31,15 @@ title-pag{
     padding: 0;
     padding: 5px;
     text-align: center;
+    font-size: 1.4em;
+    color: #000;
 }
 
+.div-inp input{
+    text-align: center;
+    font-size: 1.4em;
+    font-weight: 800;
+}
 
 .text{
     text-align: center;

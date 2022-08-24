@@ -51,44 +51,78 @@ foreach (@$db->query($sql1) as $row) {
         <title>Visualizar Fila de Tratativas</title>
     </head>
     <body>
-
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">ID</th>
-                <th scope="col">UF</th>
-                <th scope="col">CIDADE</th>
-                <th scope="col">ENDEREÇO</th>
-                <th scope="col">ACESSO REFERÊNCIA</th>
-                <th scope="col">CDO REFERÊNCIA</th>
-                <th scope="col">PROBLEMA VISTORIA</th>
-                <th scope="col">DATA CADASTRO</th>
-            </tr>
-        </thead>
-        <tbody>
-
-            <?php
-                $sql = "SELECT * FROM pci.vistoria";
-                $qr = mysql_query($sql);
-                while ($res = mysql_fetch_assoc($qr)){
-            ?>
-                <tr>
-                    <td><strong><?php echo strtoupper($res['id'])?></strong></td>
-                    <td><strong><?php echo strtoupper($res['uf'])?></strong></td>
-                    <td><strong><?php echo strtoupper($res['cidade'])?></strong></td>
-                    <td><strong><?php echo strtoupper($res['endereco'])?></strong></td>
-                    <td><strong><?php echo strtoupper($res['acessoRef'])?></strong></td>
-                    <td><strong><?php echo strtoupper($res['problema'])?></strong></td>
-                    <td><strong><?php echo strtoupper($res['equipeVistoria'])?></strong></td>
-                    <td><strong><?php echo strtoupper($res['dataCadastro'])?></strong></td>
-                    
+        <table class="table table-bordered border-secondary table-striped">
+            <thead>
+                <tr class="">
+                    <th class="" scope="col">ID</th>
+                    <th class="" scope="col">UF</th>
+                    <th class="" scope="col">CIDADE</th>
+                    <th class="" scope="col">ENDEREÇO</th>
+                    <th class="" scope="col">ACESSO REFERÊNCIA</th>
+                    <th class="" scope="col">CDO REFERÊNCIA</th>
+                    <th class="" scope="col">PROBLEMA VISTORIA</th>
+                    <th class="" scope="col">DATA CADASTRO</th>
+                    <th class="" scope="col">TRATATIVA</th>
                 </tr>
-            <?php
-            }?>
+            </thead>
+            <tbody>
 
-        </tbody>
+                <?php
+                    $sql = "SELECT * FROM pci.vistoria";
+                    $qr = mysql_query($sql);
+                    while ($res = mysql_fetch_assoc($qr)){
+                ?>
+                    <tr>
+                        <td><strong><?php echo strtoupper($res['id'])?></strong></td>
+                        <td><strong><?php echo strtoupper($res['uf'])?></strong></td>
+                        <td><strong><?php echo strtoupper($res['cidade'])?></strong></td>
+                        <td><strong><?php echo strtoupper($res['endereco'])?></strong></td>
+                        <td><strong><?php echo strtoupper($res['acessoRef'])?></strong></td>
+                        <td><strong><?php echo strtoupper($res['cdoRef'])?></strong></td>
+                        <td><strong><?php echo strtoupper($res['problema'])?></strong></td>
+                        <td><strong><?php echo strtoupper($res['dataCadastro'])?></strong></td>
+
+                        <td>
+                            <button type="button"  id="<?php echo $res['id']?>" value="<?php echo $res['id']?>" class="btn  btn-primary">
+                                <a href="#" style="text-decorate: none; color: #ffffff;">Tratar</a> 
+                            </button>
+                        </td>
+                    </tr>
+                <?php
+                }?>
+
+            </tbody>
         </table>
+
+
+
+        <button type="button" style="width: 65px; height: 35px;" id="btn-img"
+            name="visualizar_imagens" onClick='botaoOK(<?php echo $res['id_oportunidade']?>)'
+            class="btn btn-xs btn-primary" data-toggle="modal"
+            data-target="#myModalvizualizar">Imagens
+        </button>
+
+
+
+        <div class="modal fade" id="myModalvizualizar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog  aumentarModal" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div id="imagens-modal"></div> 
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div> 
+        <?php   
+            desconectar($db);
+        ?>
 
 
 

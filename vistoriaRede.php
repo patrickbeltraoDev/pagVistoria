@@ -107,16 +107,16 @@
                     </div>
                                                         <!-- ACESSO GPON REFERÊNCIA -->
                     <div class="col-sm-12 col-md-6 div-inp">
-                        <label for="acessoGP" class="bg-danger">INFORME ACESSO GPON DE REFERÊNCIA</label>
-                        <input type="text" class="form-control" id="acessoGP" name="acessoGP">
+                        <label for="acessoRef" class="bg-danger">INFORME ACESSO GPON DE REFERÊNCIA</label>
+                        <input type="text" class="form-control" id="acessoRef" name="acessoRef">
                     </div>
                 </div>
                 
                 <div class="row" style="margin-top: 20px">
                                                     <!-- CDO REFERÊNCIA -->
                     <div class="col-sm-12 col-md-6 div-inp">
-                        <label for="cdo" class="bg-danger">INFORME CDO DE REFERÊNCIA</label>
-                        <input type="text" class="form-control" id="cdo" name="cdo">
+                        <label for="cdoRef" class="bg-danger">INFORME CDO DE REFERÊNCIA</label>
+                        <input type="text" class="form-control" id="cdoRef" name="cdoRef">
                     </div>
                                  
                     <div class="col-sm-12 col-md-6  div-inp">
@@ -142,8 +142,8 @@
                 <div class="row" style="margin-top: 20px">
                                                     <!-- ESCOLHA DA ÁREA QUE VAI FAZER A TRATATIVA -->
                     <div class="col-sm-12 col-md-12 div-inp">
-                        <label for="areaVistoria" class="bg-danger">ÁREA QUE VAI EXECUTAR A VISTORIA</label>
-                        <select class="form-select form-select-lg mb-3" name="areaVistoria" aria-label=".form-select-lg example">
+                        <label for="equipeVistoria" class="bg-danger">ÁREA QUE VAI EXECUTAR A VISTORIA</label>
+                        <select class="form-select form-select-lg mb-3" name="equipeVistoria" aria-label=".form-select-lg example">
                             <option selected>Escolha a área</option>
                             <option value="1">MANUTENÇÃO</option>
                             <option value="2">HOME CONNECT</option>

@@ -59,6 +59,11 @@
             </div>
 
             <form action="#" method="post" class="formulario" id="filtro">
+                <div style="display: none;">
+                    <input type="text" name="tr" value="<?php echo $usr_matricula_oi?>">
+                    <input type="text" name="nome" value="<?php echo $usr_nome?>">
+                </div>
+
                 <div class="row">
                     <div class="col-sm-12 col-md-6 div-inp">
                                                             <!-- UF -->

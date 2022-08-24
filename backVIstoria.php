@@ -15,7 +15,7 @@ $cidade = implode("','", $_REQUEST['nome_localidade']);
 $endereco = $_POST['endereco'];
 $acessoRef = $_POST['acessoRef'];
 $cdoRef = $_POST['cdoRef'];
-$vistoriaProb = $_POST['vistoriaProblema'];
+$vistoriaProb = implode("','", $_REQUEST['vistoriaProblema']);
 $equipeVistoria = $_POST['equipeVistoria'];
 
 $data_importacao = date('Y-m-d H:i:s');

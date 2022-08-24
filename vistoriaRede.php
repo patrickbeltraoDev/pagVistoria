@@ -150,8 +150,8 @@
                         <label for="equipeVistoria" class="bg-danger">ÁREA QUE VAI EXECUTAR A VISTORIA</label>
                         <select class="form-select form-select-lg mb-3" name="equipeVistoria" aria-label=".form-select-lg example">
                             <option selected>Escolha a área</option>
-                            <option value="1">MANUTENÇÃO</option>
-                            <option value="2">HOME CONNECT</option>
+                            <option value="MANUTENÇÃO">MANUTENÇÃO</option>
+                            <option value="HOME CONNECT">HOME CONNECT</option>
                         </select>
                     </div>          
                 </div>

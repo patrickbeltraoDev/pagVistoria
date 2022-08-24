@@ -10,7 +10,7 @@ title-pag{
 
 .title{
     margin-top: 20px;
-    margin-bottom: 40px;
+    /* margin-bottom: 40px; */
     display: flex;
     justify-content: center;
 }
@@ -31,13 +31,13 @@ title-pag{
     padding: 0;
     padding: 5px;
     text-align: center;
-    font-size: 1.4em;
+    font-size: 1.2em;
     color: #000;
 }
 
 .div-inp input{
     text-align: center;
-    font-size: 1.4em;
+    font-size: 1.2em;
     font-weight: 800;
 }
 

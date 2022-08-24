@@ -88,29 +88,52 @@
                             }
                         ?>
 
-                        <select name='nome_localidade[]' id="nome_localidade" required title="CIDADE">
+                        <select name='nome_localidade[]' id="nome_localidade" required title="CIDADE" >
                             <?php echo $tag_filtros['nome_localidade']; ?>
                         </select> 
                     </div>
                     
                 </div>
+                                                   
+                <div class="row" style="margin-top: 20px">
+                                                        <!-- ENDEREÇO -->
+                    <div class="col-6 div-inp">
+                        <label for="endereco" class="bg-danger">ENDEREÇO</label>
+                        <input type="text" class="form-control" id="endereco" name="endereco">
+                    </div>
+                                                        <!-- ACESSO GPON REFERÊNCIA -->
+                    <div class="col-6 div-inp">
+                        <label for="acessoGP" class="bg-danger">INFORME ACESSO GPON DE REFERÊNCIA</label>
+                        <input type="text" class="form-control" id="acessoGP" name="acessoGP">
+                    </div>
+                </div>
+                
+                <div class="row" style="margin-top: 20px">
+                                                    <!-- CDO REFERÊNCIA -->
+                    <div class="col-6 div-inp">
+                        <label for="cdo" class="bg-danger">INFORME CDO DE REFERÊNCIA</label>
+                        <input type="text" class="form-control" id="cdo" name="cdo">
+                    </div>
+                                 
+                    <div class="col-6  div-inp">
+                                                    <!-- PROBLEMA A SER INVESTIGADO -->
+                        <label for="vistoriaProblema" class="bg-danger">PROBLEMA A SER INVESTIGADO</label>
+                            <?php
+                                $sql3 = "SELECT * from pci.vistoriaProb";
+                                $qr_3 = mysql_query($sql3) or die(error_msg(mysql_error(), $sql3));
+                                while ($result_prob = mysql_fetch_assoc($qr_3) ){
+                                    $v_filtros['problema'][] = $result_prob['problema'];
+                                }
+                                foreach ($v_filtros['problema'] as $key) {
+                                    $ar = $tag_filtros['problema'] .= "<option value='$key' " . (in_array($key, $_REQUEST['problema']) ? 'selected' : '') . ">$key</option>";
+                                }
+                            ?>
 
-                <!-- <div class="form-floating mb-3">
-                    <label for="cidade">CIDADE</label>
-                    <input type="text" class="form-control" id="cidade" name="cidade">
+                        <select name='vistoriaProblema[]' id="vistoriaProblema" required title="VistoriaProblema" >
+                            <?php echo $tag_filtros['problema']; ?>
+                        </select> 
+                    </div>
                 </div>
-                <div class="form-floating mb-3">
-                    <label for="endereco">ENDEREÇO</label>
-                    <input type="text" class="form-control" id="endereco" name="endereco">
-                </div>
-                <div class="form-floating mb-3">
-                    <label for="acessoGP">INFORME ACESSO GPON DE REFERÊNCIA</label>
-                    <input type="text" class="form-control" id="acessoGP" name="acessoGP">
-                </div>
-                <div class="form-floating mb-3">
-                    <label for="cdo">INFORME CDO DE REFERÊNCIA</label>
-                    <input type="text" class="form-control" id="cdo" name="cdo">
-                </div> -->
 
 
 

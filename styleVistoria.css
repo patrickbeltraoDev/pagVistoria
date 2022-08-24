@@ -18,6 +18,20 @@ title-pag{
     text-align: center;
 }
 
+.div-inp label, select{
+    margin: 0;
+    padding: 0;
+    padding: 5px;
+    text-align: center;
+}
+
+
 .text{
     text-align: center;
+}
+
+.form-control{
+    margin: 0;
+    padding: 5px;
+    font-weight: 400;
 }

@@ -26,7 +26,7 @@ title-pag{
     text-align: center;
 }
 
-.div-inp label, select{
+.div-inp label, select, input{
     margin: 0;
     padding: 0;
     padding: 5px;
@@ -45,8 +45,13 @@ title-pag{
     text-align: center;
 }
 
-.form-control{
+/* .form-control{
     margin: 0;
     padding: 5px;
     font-weight: 400;
+} */
+
+.btn{
+    font-weight: 800;
+    font-size: 1.2em;
 }

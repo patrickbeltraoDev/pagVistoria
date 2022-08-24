@@ -50,6 +50,7 @@
     <body>
 
         <div class="container">
+
             <div class="title">
                 <h2 class="title-pag" >VISTORIA DE REDE OFENSORA DE ROMPIMENTO DE DROP E CABO</h2>
             </div>
@@ -57,7 +58,7 @@
                 <h3 class="title-pag" >CADASTRO - [<span>RCO</span>]</h2>
             </div>
 
-            <form action="backVistoria.php" method="post" class="">
+            <form action="#" method="post" class="formulario" id="filtro">
                 <div class="row">
                     <div class="col-sm-12 col-md-6 div-inp">
                                                             <!-- UF -->
@@ -140,34 +141,71 @@
 
                 <div class="row" style="margin-top: 20px">
                                                     <!-- ESCOLHA DA ÁREA QUE VAI FAZER A TRATATIVA -->
-                    <div class="col-sm-12 col-md-6 div-inp">
+                    <div class="col-sm-12 col-md-12 div-inp">
                         <label for="areaVistoria" class="bg-danger">ÁREA QUE VAI EXECUTAR A VISTORIA</label>
                         <select class="form-select form-select-lg mb-3" name="areaVistoria" aria-label=".form-select-lg example">
                             <option selected>Escolha a área</option>
                             <option value="1">MANUTENÇÃO</option>
                             <option value="2">HOME CONNECT</option>
                         </select>
-                    </div>
-                                
+                    </div>          
                 </div>
 
+                <div id="resultado"></div>
+
+                <div class="row" style="margin-top: 30px; margin-bottom: 50px;">
+                    <button type="submit" class="btn btn-outline-success col-sm-4 col-md-4" style="margin: auto;">Enviar</button>
+                </div>
             </form>
+
+             
 
         </div>
 
+        <script type="text/javascript">
+            $(function() {
 
+                $('#filtro').submit(function(event) {
+                    event.preventDefault();
+                    var formDados = new FormData($(this)[0]);
+                    alert('AGUARDE !!! EM PROCESSAMENTO !!!');
+                    $('#resultado').html(
+                                '<div class="alert alert-danger col-md-12" role="alert"><h2>AGUARDE !!! EM PROCESSAMENTO !!!</h2></div>'
+                                );
 
-
-
-
-
-
-
-
-
-
+                    $.ajax({
+        
+                        url: 'backVistoria.php', 
+                        type: 'POST',
+                        data: formDados,
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        success: function(data) {
+                        //console.log(data);
+                            $('#resultado').html(
+                                ''
+                                );
+                            $('.recebe').html(data);
+                            
+                            $('#filtro').each(function() {
+                                alert('DADOS INSERIDOS COM SUCESSO!!!');
+                                this.reset();
+                                window.setTimeout("location.href='vistoriaRede.php';",
+                                    2000);
+                            });
+                        },
+                        dataType: 'html'
+                    });
+                    return false;
+                });
+            }); 
+        </script>
 
 
         <script src="./css/js/bootstrap.bundle.min.js"></script>
+        <script type="text/javascript" src="./js/controle_ftth.js"></script>
+        <script type="text/javascript" src="pci/tim/js/jquery.min.js"></script>
+        <script type="text/javascript" src="./js/aud_controle_validacao.js"></script>
     </body>
 </html>

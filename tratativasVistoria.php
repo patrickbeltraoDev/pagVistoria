@@ -44,11 +44,34 @@ foreach (@$db->query($sql1) as $row) {
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="./css/bootstrap.min.css">
+        <script type="text/javascript" src="./js/jquery.min.js"></script>
         <link rel="stylesheet" href="./css/styleVistoriaManutencao.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200&display=swap" rel="stylesheet">
         <title>Visualizar Fila de Tratativas</title>
+
+        <script type="text/javascript">
+            function botaoOK(id){  
+                var validar_os = $('#validar_os').val();
+            $.ajax({
+                url : "./backTratativa.php",
+                type : 'post',
+                dataType : 'html',
+                data : {acao: 'modalTabela', id: id}, 
+                beforeSend : function () {},
+
+            success: function(dados) {
+                $('#imagens-modal').html(dados);
+                //$('.receber').html(dados);
+                // console.log(dados);
+                location.href= "./tratativasVistoria.php";
+            }
+            });
+            chamaFoto(validar_os);
+            }
+
+        </script>
     </head>
     <body>
         <table class="table table-bordered border-secondary table-striped">
@@ -83,8 +106,11 @@ foreach (@$db->query($sql1) as $row) {
                         <td><strong><?php echo strtoupper($res['dataCadastro'])?></strong></td>
 
                         <td>
-                            <button type="button" id="<?php echo $res['id']?>" value="<?php echo $res['id']?>" class="btn  btn-primary" data-toggle="modal" data-target="#myModalvizualizar">
-                                <a href="#" style="text-decorate: none; color: #ffffff;">Tratar</a> 
+                            <button type="button" id="<?php echo $res['id']?>" value="<?php echo $res['id']?>" 
+                            onClick='botaoOK(<?php echo $res['id']?>)' class="btn  btn-primary" data-toggle="modal" 
+                            data-target="#myModalvizualizar">
+                                Tratar
+                                <!-- <a href="#" style="text-decorate: none; color: #ffffff;">Tratar</a>  -->
                             </button>
                         </td>
                     </tr>
@@ -97,7 +123,7 @@ foreach (@$db->query($sql1) as $row) {
 
 
         <button type="button" style="width: 65px; height: 35px;" id="btn-img"
-            name="visualizar_imagens" onClick='botaoOK(<?php echo $res['id_oportunidade']?>)'
+            name="visualizar_imagens" onClick='botaoOK(<?php echo $res['id']?>)'
             class="btn btn-xs btn-primary" data-toggle="modal"
             data-target="#myModalvizualizar">Imagens
         </button>
@@ -123,34 +149,14 @@ foreach (@$db->query($sql1) as $row) {
 
 
 
-        <?php   
+        <!-- < ?php   
             desconectar($db);
-        ?>
+        ?> -->
 
 
 
 
-        <script>
-            function botaoOK(id){  
-                var validar_os = $('#validar_os').val();
-            $.ajax({
-                url : "./controle_ajax_oportunidade.php",
-                type : 'post',
-                dataType : 'html',
-                data : {acao: 'modalTabela', id: id}, 
-                beforeSend : function () {},
-
-            success: function(dados) {
-                $('#imagens-modal').html(dados);
-                //$('.receber').html(dados);
-                // console.log(dados);
-                location.href= "./visualizar_evid_melhorias.php";
-            }
-            });
-            chamaFoto(validar_os);
-            }
-            
-        </script>
+        
 
 
 

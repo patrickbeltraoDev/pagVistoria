@@ -83,7 +83,7 @@ foreach (@$db->query($sql1) as $row) {
                         <td><strong><?php echo strtoupper($res['dataCadastro'])?></strong></td>
 
                         <td>
-                            <button type="button"  id="<?php echo $res['id']?>" value="<?php echo $res['id']?>" class="btn  btn-primary">
+                            <button type="button" id="<?php echo $res['id']?>" value="<?php echo $res['id']?>" class="btn  btn-primary" data-toggle="modal" data-target="#myModalvizualizar">
                                 <a href="#" style="text-decorate: none; color: #ffffff;">Tratar</a> 
                             </button>
                         </td>
@@ -120,9 +120,37 @@ foreach (@$db->query($sql1) as $row) {
                 </div>
             </div>
         </div> 
+
+
+
         <?php   
             desconectar($db);
         ?>
+
+
+
+
+        <script>
+            function botaoOK(id){  
+                var validar_os = $('#validar_os').val();
+            $.ajax({
+                url : "./controle_ajax_oportunidade.php",
+                type : 'post',
+                dataType : 'html',
+                data : {acao: 'modalTabela', id: id}, 
+                beforeSend : function () {},
+
+            success: function(dados) {
+                $('#imagens-modal').html(dados);
+                //$('.receber').html(dados);
+                // console.log(dados);
+                location.href= "./visualizar_evid_melhorias.php";
+            }
+            });
+            chamaFoto(validar_os);
+            }
+            
+        </script>
 
 
 

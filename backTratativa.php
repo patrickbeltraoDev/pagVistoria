@@ -8,18 +8,29 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200&display=swap" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
 
         <script type="text/javascript">
-            function changestatus(){
-                var status = document.getElementsByName("escolha2");
+            // function changestatus(){
+            //     var status = document.getElementsByName("escolha2");
 
-                if (status.value == "sim"){
-                    document.getElementById("opEncontrada").style.display = "block";
+            //     if (status.value == "sim"){
+            //         document.getElementById("opEncontrada").style.display = "block";
+            //     }
+            //     else if(status.value == "nao"){
+            //         document.getElementById("opEncontrada").style.display = "none";
+            //     }
+            // }
+
+            
+            $('input[name="escolha2"]').change(function () {
+                if ($('input[name="escolha2"]:checked').val() == "sim") {
+                    $('#opEncontrada').show();
+                } else {
+                    $('#opEncontrada').hide();
                 }
-                else if(status.value == "nao"){
-                    document.getElementById("opEncontrada").style.display = "none";
-                }
-            }
+            });
+            
         </script>
 
         <style>
@@ -110,6 +121,17 @@
             font-size: 1.4em;
         }
 
+        .select{
+            text-align: center;
+            font-size: 1.4em;
+            padding: 5px;
+            font-weight: 700;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            border-bottom: 1px solid #444;
+        }
+
         </style>
     </head>
     <body>
@@ -127,7 +149,7 @@
 
                 $sql = "SELECT * from pci.vistoria where id = $id";
                 foreach (@$db->query($sql) as $row) {
-                    echo '
+                    // echo '?>
                         <div class="container">
                             <div class="header">
                                 <h1>Dados do Cadastro</h1>
@@ -139,7 +161,7 @@
                                         <label>ID</label>
                                     </div>
                                     <div class="article">
-                                        <div class="dados">' . $row['id'] . '</div>
+                                        <div class="dados"><?php echo $row['id'] ?></div>
                                     </div>
                                 </div>  
 
@@ -148,7 +170,7 @@
                                         <label>TR</label>
                                     </div>
                                     <div class="article">
-                                        <div class="dados">' . $row['tr'] . '</div>
+                                        <div class="dados"><?php echo $row['id'] ?></div>
                                     </div>
                                 </div>  
 
@@ -157,7 +179,7 @@
                                         <label>NOME</label>
                                     </div>
                                     <div class="article">
-                                        <div class="dados">' . $row['nome'] . '</div>
+                                        <div class="dados"><?php echo $row['nome'] ?></div>
                                     </div>
                                 </div>  
 
@@ -166,7 +188,7 @@
                                         <label>UF</label>
                                     </div>
                                     <div class="article">
-                                        <div class="dados">' . $row['uf'] . '</div>
+                                        <div class="dados"><?php echo $row['uf'] ?></div>
                                     </div>
                                 </div>  
 
@@ -175,7 +197,7 @@
                                         <label>CIDADE</label>
                                     </div>
                                     <div class="article">
-                                        <div class="dados">' . $row['cidade'] . '</div>
+                                        <div class="dados"><?php echo $row['cidade'] ?></div>
                                     </div>
                                 </div>  
         
@@ -184,7 +206,7 @@
                                         <label>ACESSO GPON REFERÊNCIA</label>
                                     </div>
                                     <div class="article">
-                                        <div class="dados">' . $row['acessoRef'] . '</div>
+                                        <div class="dados"><?php echo $row['acessoRef'] ?></div>
                                     </div>
                                 </div>  
                                 <div class="info">
@@ -192,7 +214,7 @@
                                         <label>CDO REFERÊNCIA</label>
                                     </div>
                                     <div class="article">
-                                        <div class="dados">' . $row['cdoRef'] . '</div>
+                                        <div class="dados"><?php echo $row['cdoRef'] ?></div>
                                     </div>
                                 </div>  
         
@@ -201,7 +223,7 @@
                                         <label>DATA DO CADASTRO</label>
                                     </div>
                                     <div class="article">
-                                        <div class="dados">' . $row['dataCadastro'] . '</div>
+                                        <div class="dados"><?php echo $row['dataCadastro'] ?></div>
                                     </div>
                                 </div>  
 
@@ -210,7 +232,7 @@
                                         <label>PROBLEMA A SER INVESTIGADO</label>
                                     </div>
                                     <div class="article">
-                                        <div class="dados">' . $row['problema'] . '</div>
+                                        <div class="dados"><?php echo $row['problema'] ?></div>
                                     </div>
                                 </div>
 
@@ -219,7 +241,7 @@
                                         <label>ENDEREÇO</label>
                                     </div>
                                     <div class="article">
-                                        <div class="dados">' . $row['endereco'] . '</div>
+                                        <div class="dados"><?php echo $row['endereco'] ?></div>
                                     </div>
                                 </div> 
 
@@ -235,12 +257,12 @@
                                             </div>
                                             <div class="article-form">
                                                 <div>
-                                                    <label for="sim">SIM</label>
-                                                    <input type="radio" name="escolha" id="sim" value="sim">
+                                                    <label for="sim1">SIM</label>
+                                                    <input type="radio" name="escolha" id="sim1" value="sim">
                                                 </div>
                                                 <div>
-                                                    <label for="nao">NÃO</label>
-                                                    <input type="radio" name="escolha" id="nao" value="nao">
+                                                    <label for="nao1">NÃO</label>
+                                                    <input type="radio" name="escolha" id="nao1" value="nao">
                                                 </div>
                                             </div>
                                         </div>
@@ -251,12 +273,12 @@
                                             </div>
                                             <div class="article-form">
                                                 <div>
-                                                    <label for="sim">SIM</label>
-                                                    <input type="radio" name="escolha2" id="sim" value="sim" onchange="changestatus()">
+                                                    <label for="sim2">SIM</label>
+                                                    <input type="radio" name="escolha2" id="sim2" value="sim">
                                                 </div>
                                                 <div>
-                                                    <label for="nao">NÃO</label>
-                                                    <input type="radio" name="escolha2" id="nao" value="nao" onchange="changestatus()">
+                                                    <label for="nao2">NÃO</label>
+                                                    <input type="radio" name="escolha2" id="nao2" value="nao" checked>
                                                 </div>
                                             </div>
                                         </div>
@@ -266,8 +288,14 @@
                                                 <label>ESCOLHA A OPORTUNIDADE ENCONTRADA</label>
                                             </div>
                                             <div class="article-form">
-                                                <select>
-
+                                                <select name='probEncontrado' id='probEncontrado' class='select'>
+                                                    <?php 
+                                                        $sql2 = "SELECT * FROM pci.vistoriaTratativa";
+                                                        $qr2 = mysql_query($sql2) or die(error_msg(mysql_error(), $sql2));
+                                                        while ($res2 = mysql_fetch_assoc($qr2) ){
+                                                            echo '<option value="'.$res2['id'].'">'.$res2['problema'].'</option>';
+                                                        }
+                                                    ?>
                                                 </select>
                                             </div>
                                         </div>
@@ -279,7 +307,8 @@
                             </div>
                         </div>
                     
-                    ';
+                    <!-- '; -->
+                    <?php
                 }
             break;
             case 'modalFotos':
@@ -333,7 +362,7 @@
                 foreach (@$db->query($sql4) as $row) {
                 $array[]=$row;
                 }
-            echo json_encode($array);
+                echo json_encode($array);
             
             
             break;

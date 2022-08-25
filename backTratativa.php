@@ -1,3 +1,39 @@
+<?php
+    //author: Patrick,  Data inicial: 23/08/2022
+
+    date_default_timezone_set('America/Sao_Paulo');
+    ini_set("display_errors", 0);
+    include_once('../conexao/config.php');
+    include_once('../conexao/conectar.php');
+    include_once('../funcao/dias.php');
+    include_once('../funcao/converte_letras.php');
+    include_once('../funcao/funcoes_jean.php'); 
+    include_once('../redimensiona.php');
+    
+    $db = new PDO($dsn, $dbuser, $dbpass, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+
+    ////////// - DADOS DO LOGIN - \\\\\\\\\
+    $permissoes = get_permissoes();
+    //$nome = $permissoes['nome'];
+    $usr_matricula = $_SESSION['chapa_tlm'];
+    $data = date('d-m-Y');
+    $nome = $_SESSION['usr_nome'];
+    $usr_matricula_oi = $_SESSION['usr_matricula'];
+    $usr_matricula_tlm = $_SESSION['chapa_tlm'];
+    $usr_funcao = $_SESSION['usr_funcao'];
+
+    $sql1 = "SELECT s.cargo , nome from pci.funcionarios_sigo AS s 
+    where s.chapa_brt ='$usr_matricula_oi'
+    group by s.cargo";
+
+    foreach (@$db->query($sql1) as $row) {
+        $usr_nome = $row['nome'];
+        $cargo = $row['cargo'];
+    }
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
@@ -8,6 +44,7 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200&display=swap" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+        <link rel="stylesheet" href="./css/styleVistoriaManutencao.css">
 
         <script type="text/javascript">
             
@@ -17,153 +54,11 @@
                     $('#upload-img').show();
                 } else {
                     $('#opEncontrada').hide();
-                    $('#upload-img').hide();
+                    $('#opEncontrada').hide();
                 }
             });
             
         </script>
-
-        <style>
-
-        .container{
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            font-family: 'Oswald', sans-serif;
-            letter-spacing: 1.1px;
-            padding: 0;
-            margin: 0;
-        }
-
-        .header{
-            background-color: #571925;
-            width: 100%;
-            margin: auto;
-            color: #fff;
-
-        }
-
-        .header h1{
-            font-size: 2em;
-            text-align: center;
-        }
-
-        .main{
-            width: 100%;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            padding: 10px;
-        }
-
-        .info{
-            padding: 10px;
-            display: flex;
-            flex-direction: column;
-            margin: 5px;
-            min-width: 350px;
-        }
-
-        .info-lograd{
-            padding: 10px;
-            display: flex;
-            flex-direction: column;
-            margin: 5px;
-            width: 100%;
-            min-width: 300px;
-        }
-
-        .head{
-            text-align: center;
-            font-size: 1.4em;
-            background-color: #dc3545;
-            color: #fff;
-            /* padding: 5px; */
-        }
-
-        .article{
-            /* width: auto; */
-            padding: 5px;
-        }
-
-        .dados{
-            text-align: center;
-            font-size: 1.4em;
-            padding: 5px;
-            font-weight: 700;
-            border-top: none;
-            border-left: none;
-            border-right: none;
-            border-bottom: 1px solid #444;
-        }
-
-        /* formulario */
-
-        .article-form{
-            padding: 5px;
-            display: flex;
-            justify-content: space-around;
-            border-bottom: 1px solid #444;
-        }
-
-        .article-form label{
-            font-weight: 700;
-            font-size: 1.4em;
-        }
-
-        .select{
-            text-align: center;
-            font-size: 1.4em;
-            padding: 5px;
-            font-weight: 700;
-        }
-
-        .center{
-            justify-content: center;
-        }
-
-        form:nth-child(3){
-            width: 100%;
-        }
-
-        .imagens{
-            display: flex;
-            width: 100%;
-            /* border-bottom: 1px solid #000; */
-            box-sizing: border-box;
-        }
-
-        .upload{
-            display: flex;
-        }
-        input[type="file"]{
-            display: none;
-        }
-        .imagens label{
-            padding: 10px 30px;
-            background-color: #fff;
-            color: #333;
-            text-align: center;
-            transition: .5s;
-            margin-top: 3px;
-            font-size: 1.4em;
-        }
-
-        .imagens label:hover{
-            color: #fff;
-            background-color: #dc3545;
-            border: 1px solid #000;
-        }
-
-        .upload img{
-            width: 20px;
-            height: 20px;
-            margin-left: 10px;
-        }
-
-
-
-        </style>
     </head>
     <body>
 
@@ -201,7 +96,7 @@
                                         <label>TR</label>
                                     </div>
                                     <div class="article">
-                                        <div class="dados"><?php echo $row['id'] ?></div>
+                                        <div class="dados"><?php echo $row['tr'] ?></div>
                                     </div>
                                 </div>  
 
@@ -280,7 +175,13 @@
                                     <h1>Tratativa da Vistoria</h1>
                                 </div>
 
+                                                <!-- INÍCIO - FORMULÁRIO -->
                                 <form action="#" method="post">
+                                    <div style="display: none;">
+                                        <input type="text" name="tr" value="<?php echo $usr_matricula_oi?>">
+                                        <input type="text" name="nome" value="<?php echo $usr_nome?>">
+                                        <input type="text" name="idVistoria" value="<?php echo $id?>">
+                                    </div>
                                     <div class="main center">
                                         <div class="info">
                                             <div class="head">

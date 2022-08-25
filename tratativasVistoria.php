@@ -35,6 +35,7 @@ foreach (@$db->query($sql1) as $row) {
     $cargo = $row['cargo'];
 }
 
+
 ?>
 
 <!DOCTYPE html>
@@ -109,12 +110,14 @@ foreach (@$db->query($sql1) as $row) {
                         <td><strong><?php echo strtoupper($res['dataCadastro'])?></strong></td>
 
                         <td>
-                            <button type="button" style="width: 65px; height: 35px;" id="btn-img"
-                                name="visualizar_imagens" onClick='botaoOK(<?php echo $res['id']?>)'
+                            <button type="submit" style="width: 65px; height: 35px;" id="btn-img"
+                                name="visualizar_imagens" value="<?php echo $res['id']?>"
                                 class="btn btn-xs btn-primary" data-toggle="modal"
-                                data-target="#myModalvizualizar">Imagens
+                                data-target="#myModalvizualizar" onClick='botaoOK(<?php echo $res['id']?>)'>
+                                Imagens
                             </button>
                         </td>
+                        
                     </tr>
                 <?php
                 }?>
@@ -130,8 +133,11 @@ foreach (@$db->query($sql1) as $row) {
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div id="imagens-modal"></div> 
+                    <div id="imagens-modal">
 
+
+                        
+                    </div> 
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>

@@ -43,7 +43,8 @@ foreach (@$db->query($sql1) as $row) {
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="./css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/bootstrap-toggle.min.css" rel="stylesheet">
+        <script type="text/javascript" src="../js/bootstrap4-toggle.min.js"></script>
         <script type="text/javascript" src="./js/jquery.min.js"></script>
         <link rel="stylesheet" href="./css/styleVistoriaManutencao.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -59,21 +60,23 @@ foreach (@$db->query($sql1) as $row) {
                 type : 'post',
                 dataType : 'html',
                 data : {acao: 'modalTabela', id: id}, 
-                beforeSend : function () {},
+                beforeSend : function () {
+
+                },
 
             success: function(dados) {
                 $('#imagens-modal').html(dados);
-                //$('.receber').html(dados);
-                // console.log(dados);
-                location.href= "./tratativasVistoria.php";
+                console.log(dados);
+                
             }
             });
-            chamaFoto(validar_os);
+            // chamaFoto(validar_os);
             }
 
         </script>
     </head>
     <body>
+
         <table class="table table-bordered border-secondary table-striped">
             <thead>
                 <tr class="">
@@ -106,11 +109,10 @@ foreach (@$db->query($sql1) as $row) {
                         <td><strong><?php echo strtoupper($res['dataCadastro'])?></strong></td>
 
                         <td>
-                            <button type="button" id="<?php echo $res['id']?>" value="<?php echo $res['id']?>" 
-                            onClick='botaoOK(<?php echo $res['id']?>)' class="btn  btn-primary" data-toggle="modal" 
-                            data-target="#myModalvizualizar">
-                                Tratar
-                                <!-- <a href="#" style="text-decorate: none; color: #ffffff;">Tratar</a>  -->
+                            <button type="button" style="width: 65px; height: 35px;" id="btn-img"
+                                name="visualizar_imagens" onClick='botaoOK(<?php echo $res['id']?>)'
+                                class="btn btn-xs btn-primary" data-toggle="modal"
+                                data-target="#myModalvizualizar">Imagens
                             </button>
                         </td>
                     </tr>
@@ -119,16 +121,6 @@ foreach (@$db->query($sql1) as $row) {
 
             </tbody>
         </table>
-
-
-
-        <button type="button" style="width: 65px; height: 35px;" id="btn-img"
-            name="visualizar_imagens" onClick='botaoOK(<?php echo $res['id']?>)'
-            class="btn btn-xs btn-primary" data-toggle="modal"
-            data-target="#myModalvizualizar">Imagens
-        </button>
-
-
 
         <div class="modal fade" id="myModalvizualizar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog  aumentarModal" role="document">
@@ -146,6 +138,7 @@ foreach (@$db->query($sql1) as $row) {
                 </div>
             </div>
         </div> 
+        
 
 
 
@@ -160,6 +153,6 @@ foreach (@$db->query($sql1) as $row) {
 
 
 
-        <script src="./css/js/bootstrap.bundle.min.js"></script>    
+        <!-- <script src="./css/js/bootstrap.bundle.min.js"></script>     -->
     </body>
 </html>

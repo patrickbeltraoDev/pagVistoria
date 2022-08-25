@@ -1,5 +1,12 @@
-<?php
+<style>
 
+
+
+
+</style>
+
+
+<?php
 include_once('../conexao/config.php');
 
 $db = new PDO($dsn, $dbuser, $dbpass, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
@@ -12,14 +19,23 @@ switch ($acao):
 
         $sql = "SELECT * from pci.vistoria where id = $id";
         foreach (@$db->query($sql) as $row) {
-            echo'
-                <div> 
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="basic-addon1">UF</span>
-                        <input type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" value="' . $row['uf'] .'">
+            echo '
+                <div class="container">
+                    <div class="header">
+                        <h1>Dados do Cadastro</h1>
+                    </div>
+
+                    <div class="main">
+                        <div class="info">
+                            <div class="head">
+                                <label>UF</label>
+                            </div>
+                            <div class="article">
+                                <input>' . $row['uf'] .'</input>
+                            </div>
+                        </div>  
                     </div>
                 </div>
-
             
             ';
         }

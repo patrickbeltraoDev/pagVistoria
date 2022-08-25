@@ -176,7 +176,7 @@
                                 </div>
 
                                                 <!-- INÍCIO - FORMULÁRIO -->
-                                <form action="#" method="post">
+                                <form action="#" method="post" id="filtro">
                                     <div style="display: none;">
                                         <input type="text" name="tr" value="<?php echo $usr_matricula_oi?>">
                                         <input type="text" name="nome" value="<?php echo $usr_nome?>">
@@ -253,6 +253,13 @@
                                                     <input type="file" id="img3" name="img3">
                                                 </div>
                                             </div>
+
+                                        </div>
+
+                                        <div align='center' style='padding: 10px' class='form-group col-md-12 grid21'>
+                                            <button align='center' id='btn' type='submit' style='width: 345px' class='btn btn-success btn-lg'
+                                            value='Enviar'>ENVIAR</button>
+                                            <input type='hidden' name='acao' value='cadastrar'>
                                         </div>
 
                                     </div>
@@ -321,6 +328,49 @@
             break;
             endswitch;
         ?>
+
+
+        <script type="text/javascript">
+            $(function() {
+
+                $('#filtro').submit(function(event) {
+                    event.preventDefault();
+                    var formDados = new FormData($(this)[0]);
+                    alert('AGUARDE !!! EM PROCESSAMENTO !!!');
+                    
+                    $.ajax({
+        
+                        url: 'backManutVistoria.php', 
+                        type: 'POST',
+                        data: formDados,
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        success: function(data) {
+                        //console.log(data);
+                            $('#resultado').html(
+                                ''
+                                );
+                            $('.recebe').html(data);
+                            
+                            $('#filtro').each(function() {
+                                alert('DADOS INSERIDOS COM SUCESSO!!!');
+                                this.reset();
+                                window.setTimeout("location.href='TratativasVistoria.php';",
+                                    2000);
+                            });
+                        },
+                        dataType: 'html'
+                    });
+                    return false;
+                });
+            }); 
+        </script>
+
+
+        <script type="text/javascript" src="./js/controle_ftth.js"></script>
+        <script type="text/javascript" src="pci/tim/js/jquery.min.js"></script>
+        <script type="text/javascript" src="./js/aud_controle_validacao.js"></script>
     </body>
 </html>
 

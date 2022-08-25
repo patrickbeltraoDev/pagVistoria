@@ -15,7 +15,7 @@
 
 
     .header{
-        background-color: #dc3545;
+        background-color: #571925;
         width: 100%;
         margin: auto;
         color: #fff;
@@ -23,7 +23,7 @@
     }
 
     .header h1{
-        font-size: 1.8em;
+        font-size: 2em;
         text-align: center;
     }
 
@@ -40,21 +40,36 @@
         display: flex;
         flex-direction: column;
         margin: 5px;
+        min-width: 350px;
+    }
+
+    .info-lograd{
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        margin: 5px;
+        width: 100%;
+        min-width: 350px;
     }
 
     .head{
         text-align: center;
-        font-size: 1.6em;
+        font-size: 1.4em;
         background-color: #dc3545;
         color: #fff;
+        /* padding: 5px; */
+    }
+
+    .article{
+        /* width: auto; */
         padding: 5px;
     }
     
-    .article input{
-        /* width: 100%; */
+    .dados{
         text-align: center;
         font-size: 1.4em;
         padding: 5px;
+        font-weight: 700;
         border-top: none;
         border-left: none;
         border-right: none;
@@ -85,30 +100,30 @@ switch ($acao):
                     </div>
 
                     <div class="main">
-                        <div class="info col-4">
+                        <div class="info">
                             <div class="head">
                                 <label>ID</label>
                             </div>
                             <div class="article">
-                                <input type="text" readonly value="' . $row['id'] . '">
+                                <div class="dados">' . $row['id'] . '</div>
                             </div>
                         </div>  
 
-                        <div class="info col-4">
+                        <div class="info">
                             <div class="head">
                                 <label>TR</label>
                             </div>
                             <div class="article">
-                                <input type="text" readonly value="' . $row['tr'] . '">
+                                <div class="dados">' . $row['tr'] . '</div>
                             </div>
                         </div>  
 
-                        <div class="info col-4">
+                        <div class="info">
                             <div class="head">
                                 <label>NOME</label>
                             </div>
                             <div class="article">
-                                <input type="text" readonly value="' . $row['nome'] . '">
+                                <div class="dados">' . $row['nome'] . '</div>
                             </div>
                         </div>  
 
@@ -117,7 +132,7 @@ switch ($acao):
                                 <label>UF</label>
                             </div>
                             <div class="article">
-                                <input type="text" readonly value="' . $row['uf'] . '">
+                                <div class="dados">' . $row['uf'] . '</div>
                             </div>
                         </div>  
 
@@ -126,24 +141,16 @@ switch ($acao):
                                 <label>CIDADE</label>
                             </div>
                             <div class="article">
-                                <input type="text" readonly value="' . $row['cidade'] . '">
+                                <div class="dados">' . $row['cidade'] . '</div>
                             </div>
                         </div>  
-
-                        <div class="info">
-                            <div class="head">
-                                <label>ENDEREÇO</label>
-                            </div>
-                            <div class="article">
-                                <input type="text" readonly value="' . $row['endereco'] . '">
-                            </div>
-                        </div>  
+ 
                         <div class="info">
                             <div class="head">
                                 <label>ACESSO GPON REFERÊNCIA</label>
                             </div>
                             <div class="article">
-                                <input type="text" readonly value="' . $row['acessoRef'] . '">
+                                <div class="dados">' . $row['acessoRef'] . '</div>
                             </div>
                         </div>  
                         <div class="info">
@@ -151,25 +158,36 @@ switch ($acao):
                                 <label>CDO REFERÊNCIA</label>
                             </div>
                             <div class="article">
-                                <input type="text" readonly value="' . $row['cdoRef'] . '">
+                                <div class="dados">' . $row['cdoRef'] . '</div>
                             </div>
                         </div>  
-                        <div class="info">
-                            <div class="head">
-                                <label>PROBLEMA A SER INVESTIGADO</label>
-                            </div>
-                            <div class="article">
-                                <input type="text" readonly value="' . $row['problema'] . '">
-                            </div>
-                        </div>  
+  
                         <div class="info">
                             <div class="head">
                                 <label>DATA DO CADASTRO</label>
                             </div>
                             <div class="article">
-                                <input type="text" readonly value="' . $row['dataCadastro'] . '">
+                                <div class="dados">' . $row['dataCadastro'] . '</div>
                             </div>
                         </div>  
+
+                        <div class="info">
+                            <div class="head">
+                                <label>PROBLEMA A SER INVESTIGADO</label>
+                            </div>
+                            <div class="article">
+                                <div class="dados">' . $row['problema'] . '</div>
+                            </div>
+                        </div>
+
+                        <div class="info-lograd">
+                            <div class="head">
+                                <label>ENDEREÇO</label>
+                            </div>
+                            <div class="article">
+                                <div class="dados">' . $row['endereco'] . '</div>
+                            </div>
+                        </div> 
                     </div>
                 </div>
             

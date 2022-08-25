@@ -4,30 +4,20 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script src="./js/backTratativa.js"></script>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200&display=swap" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
 
         <script type="text/javascript">
-            // function changestatus(){
-            //     var status = document.getElementsByName("escolha2");
-
-            //     if (status.value == "sim"){
-            //         document.getElementById("opEncontrada").style.display = "block";
-            //     }
-            //     else if(status.value == "nao"){
-            //         document.getElementById("opEncontrada").style.display = "none";
-            //     }
-            // }
-
             
             $('input[name="escolha2"]').change(function () {
                 if ($('input[name="escolha2"]:checked').val() == "sim") {
                     $('#opEncontrada').show();
+                    $('#upload-img').show();
                 } else {
                     $('#opEncontrada').hide();
+                    $('#upload-img').hide();
                 }
             });
             
@@ -126,11 +116,52 @@
             font-size: 1.4em;
             padding: 5px;
             font-weight: 700;
-            border-top: none;
-            border-left: none;
-            border-right: none;
-            border-bottom: 1px solid #444;
         }
+
+        .center{
+            justify-content: center;
+        }
+
+        form:nth-child(3){
+            width: 100%;
+        }
+
+        .imagens{
+            display: flex;
+            width: 100%;
+            /* border-bottom: 1px solid #000; */
+            box-sizing: border-box;
+        }
+
+        .upload{
+            display: flex;
+        }
+        input[type="file"]{
+            display: none;
+        }
+        .imagens label{
+            padding: 10px 30px;
+            background-color: #fff;
+            color: #333;
+            text-align: center;
+            transition: .5s;
+            margin-top: 3px;
+            font-size: 1.4em;
+        }
+
+        .imagens label:hover{
+            color: #fff;
+            background-color: #dc3545;
+            border: 1px solid #000;
+        }
+
+        .upload img{
+            width: 20px;
+            height: 20px;
+            margin-left: 10px;
+        }
+
+
 
         </style>
     </head>
@@ -250,7 +281,7 @@
                                 </div>
 
                                 <form action="#" method="post">
-                                    <div class="main">
+                                    <div class="main center">
                                         <div class="info">
                                             <div class="head">
                                                 <label>FOI LOCALIZADO FALHA ?</label>
@@ -287,22 +318,43 @@
                                             <div class="head">
                                                 <label>ESCOLHA A OPORTUNIDADE ENCONTRADA</label>
                                             </div>
-                                            <div class="article-form">
-                                                <select name='probEncontrado' id='probEncontrado' class='select'>
+                                            <div class="article">
+                                                <select name="opEncontrada" class="select">
                                                     <?php 
-                                                        $sql2 = "SELECT * FROM pci.vistoriaTratativa";
-                                                        $qr2 = mysql_query($sql2) or die(error_msg(mysql_error(), $sql2));
-                                                        while ($res2 = mysql_fetch_assoc($qr2) ){
-                                                            echo '<option value="'.$res2['id'].'">'.$res2['problema'].'</option>';
+                                                        $sql2 = "SELECT * from pci.vistoriaTratativa";
+                                                        foreach (@$db->query($sql2) as $row2) {
+                                                        ?>
+                                                            <option value="<?php echo $row2['id'] ?>"><?php echo $row2['problema'] ?></option>
+                                                        <?php
                                                         }
                                                     ?>
                                                 </select>
                                             </div>
                                         </div>
 
+                                        <div class="info" id="upload-img" style="display:none;">
+                                            <div class="head">
+                                                <label>INSERIR IMAGENS DA OPORTUNIDADE</label>
+                                            </div>
+                                            <div class="imagens">
+                                                <div class="upload">
+                                                    <label class="" for="img1">INSIRA UMA FOTO <img src="../imagem/camera.png" alt=""></label>
+                                                    <input type="file" id="img1" name="img1">
+                                                    
+                                                </div>
+                                                <div class="upload">
+                                                    <label class="" for="img2">INSIRA UMA FOTO <img src="../imagem/camera.png" alt=""></label>
+                                                    <input type="file" id="img2" name="img2">
+                                                    
+                                                </div>
+                                                <div class="upload">
+                                                    <label class="" for="img3">INSIRA UMA FOTO <img src="../imagem/camera.png" alt=""></label>
+                                                    <input type="file" id="img3" name="img3">
+                                                </div>
+                                            </div>
+                                        </div>
+
                                     </div>
-                                
-                                
                                 </form>
                             </div>
                         </div>
@@ -368,8 +420,6 @@
             break;
             endswitch;
         ?>
-
-        
     </body>
 </html>
 

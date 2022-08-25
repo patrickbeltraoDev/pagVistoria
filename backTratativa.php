@@ -1,6 +1,65 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200&display=swap" rel="stylesheet">
 <style>
 
+    .container{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        font-family: 'Oswald', sans-serif;
+        letter-spacing: 1.1px;
+        padding: 0;
+        margin: 0;
+    }
 
+
+    .header{
+        background-color: #dc3545;
+        width: 100%;
+        margin: auto;
+        color: #fff;
+
+    }
+
+    .header h1{
+        font-size: 1.8em;
+        text-align: center;
+    }
+
+    .main{
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        padding: 10px;
+    }
+
+    .info{
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        margin: 5px;
+    }
+
+    .head{
+        text-align: center;
+        font-size: 1.6em;
+        background-color: #dc3545;
+        color: #fff;
+        padding: 5px;
+    }
+    
+    .article input{
+        /* width: 100%; */
+        text-align: center;
+        font-size: 1.4em;
+        padding: 5px;
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        border-bottom: 1px solid #444;
+    }
 
 
 </style>
@@ -26,12 +85,89 @@ switch ($acao):
                     </div>
 
                     <div class="main">
+                        <div class="info col-4">
+                            <div class="head">
+                                <label>ID</label>
+                            </div>
+                            <div class="article">
+                                <input type="text" readonly value="' . $row['id'] . '">
+                            </div>
+                        </div>  
+
+                        <div class="info col-4">
+                            <div class="head">
+                                <label>TR</label>
+                            </div>
+                            <div class="article">
+                                <input type="text" readonly value="' . $row['tr'] . '">
+                            </div>
+                        </div>  
+
+                        <div class="info col-4">
+                            <div class="head">
+                                <label>NOME</label>
+                            </div>
+                            <div class="article">
+                                <input type="text" readonly value="' . $row['nome'] . '">
+                            </div>
+                        </div>  
+
                         <div class="info">
                             <div class="head">
                                 <label>UF</label>
                             </div>
                             <div class="article">
-                                <input>' . $row['uf'] .'</input>
+                                <input type="text" readonly value="' . $row['uf'] . '">
+                            </div>
+                        </div>  
+
+                        <div class="info">
+                            <div class="head">
+                                <label>CIDADE</label>
+                            </div>
+                            <div class="article">
+                                <input type="text" readonly value="' . $row['cidade'] . '">
+                            </div>
+                        </div>  
+
+                        <div class="info">
+                            <div class="head">
+                                <label>ENDEREÇO</label>
+                            </div>
+                            <div class="article">
+                                <input type="text" readonly value="' . $row['endereco'] . '">
+                            </div>
+                        </div>  
+                        <div class="info">
+                            <div class="head">
+                                <label>ACESSO GPON REFERÊNCIA</label>
+                            </div>
+                            <div class="article">
+                                <input type="text" readonly value="' . $row['acessoRef'] . '">
+                            </div>
+                        </div>  
+                        <div class="info">
+                            <div class="head">
+                                <label>CDO REFERÊNCIA</label>
+                            </div>
+                            <div class="article">
+                                <input type="text" readonly value="' . $row['cdoRef'] . '">
+                            </div>
+                        </div>  
+                        <div class="info">
+                            <div class="head">
+                                <label>PROBLEMA A SER INVESTIGADO</label>
+                            </div>
+                            <div class="article">
+                                <input type="text" readonly value="' . $row['problema'] . '">
+                            </div>
+                        </div>  
+                        <div class="info">
+                            <div class="head">
+                                <label>DATA DO CADASTRO</label>
+                            </div>
+                            <div class="article">
+                                <input type="text" readonly value="' . $row['dataCadastro'] . '">
                             </div>
                         </div>  
                     </div>

@@ -123,7 +123,7 @@ foreach (@$db->query($sql1) as $row) {
         </table>
 
         <div class="modal fade" id="myModalvizualizar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-            <div class="modal-dialog  aumentarModal" role="document">
+            <div class="modal-dialog aumentarModal" role="document"  style="width: 90vw;">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">

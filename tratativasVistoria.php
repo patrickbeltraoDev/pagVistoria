@@ -95,7 +95,7 @@ foreach (@$db->query($sql1) as $row) {
             <tbody>
 
                 <?php
-                    $sql = "SELECT * FROM pci.vistoria where status != 'tratado' or status != 'nao atuou'";
+                    $sql = "SELECT * FROM pci.vistoria where (equipeVistoria = 'MANUTENÇÃO' AND status = 'a tratar') or (equipeVistoria = 'MANUTENÇÃO' AND status = 'pendente');";
                     $qr = mysql_query($sql);
                     while ($res = mysql_fetch_assoc($qr)){
                 ?>

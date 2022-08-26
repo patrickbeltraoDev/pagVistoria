@@ -23,12 +23,13 @@ $data_importacao = date('Y-m-d H:i:s');
 $uf = implode("','", $_REQUEST['sigla_unidade_federativa']);
 
 $sql = "INSERT INTO pci.vistoria (tr, nome, uf, cidade, endereco, 
-    acessoRef, cdoRef, problema, equipeVistoria, dataCadastro)
+    acessoRef, cdoRef, problema, equipeVistoria, dataCadastro, status)
     VALUES ('$tr', '$nome', '$uf', '$cidade', upper('$endereco'), 
-    upper('$acessoRef'), upper('$cdoRef'), '$vistoriaProb', '$equipeVistoria', '$data_importacao')";
+    upper('$acessoRef'), upper('$cdoRef'), '$vistoriaProb', '$equipeVistoria', '$data_importacao', 'a tratar')";
 
 
 $qr = mysql_query($sql) or die(mysql_error("ERRO AO INSERIR!"));
 
-
+  
+desconectar($db);
 ?>

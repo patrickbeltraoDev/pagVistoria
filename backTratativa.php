@@ -221,6 +221,7 @@
                                             </div>
                                             <div class="article">
                                                 <select name="opEncontrada" class="select">
+                                                    <option value="">ESCOLHA UMA OPÇÃO</option>
                                                     <?php 
                                                         $sql2 = "SELECT * from pci.vistoriaTratativa";
                                                         foreach (@$db->query($sql2) as $row2) {
@@ -240,17 +241,17 @@
                                             <div class="imagens">
                                                 <div class="upload">
                                                     <label class="" for="img1">INSIRA UMA FOTO <img src="../imagem/camera.png" alt=""></label>
-                                                    <input type="file" id="img1" name="img1">
+                                                    <input type="file" id="img1" name="img1" required>
                                                     
                                                 </div>
                                                 <div class="upload">
                                                     <label class="" for="img2">INSIRA UMA FOTO <img src="../imagem/camera.png" alt=""></label>
-                                                    <input type="file" id="img2" name="img2">
+                                                    <input type="file" id="img2" name="img2" required>
                                                     
                                                 </div>
                                                 <div class="upload">
                                                     <label class="" for="img3">INSIRA UMA FOTO <img src="../imagem/camera.png" alt=""></label>
-                                                    <input type="file" id="img3" name="img3">
+                                                    <input type="file" id="img3" name="img3" required>
                                                 </div>
                                             </div>
 

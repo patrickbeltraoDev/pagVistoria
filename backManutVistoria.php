@@ -49,17 +49,15 @@ $sql = "INSERT INTO pci.vistoriaManutencao (tr, nome, localizadaFalha, localizad
 
 $qr = mysql_query($sql) or die(mysql_error("ERRO AO INSERIR!"));
 
-if($locFalha == 'nao' && $locOportunidade =='nao'){
-	$sql2 = "UPDATE pci.vistoria status = 'nao atuou' where id = $idVistoria";
+
+if($locFalha == 'nao' && $locOportunidade == 'nao'){
+	$sql2 = "UPDATE pci.vistoria SET status = 'nao atuou' where id = $idVistoria";
 	$qr2 = mysql_query($sql2) or die(mysql_error("ERRO AO INSERIR!"));
-}
-
-
-if($oportEncontrada == 1 || $oportEncontrada = 2){
-	$sql2 = "UPDATE pci.vistoria status = 'tratada' where id = $idVistoria";
+}elseif($oportEncontrada == 1 || $oportEncontrada == 2){
+	$sql2 = "UPDATE pci.vistoria SET status = 'tratada' where id = $idVistoria";
 	$qr2 = mysql_query($sql2) or die(mysql_error("ERRO AO INSERIR!"));
 }elseif($oportEncontrada == 3 || $oportEncontrada == 4){
-	$sql2 = "UPDATE pci.vistoria status = 'pendente' where id = $idVistoria";
+	$sql2 = "UPDATE pci.vistoria SET status = 'pendente' where id = $idVistoria";
 	$qr2 = mysql_query($sql2) or die(mysql_error("ERRO AO INSERIR!"));
 }
 

@@ -113,7 +113,7 @@
                                                         <!-- ACESSO GPON REFERÊNCIA -->
                     <div class="col-sm-12 col-md-6 div-inp">
                         <label for="acessoRef" class="bg-danger">INFORME ACESSO GPON DE REFERÊNCIA</label>
-                        <input type="text" class="form-control" id="acessoRef" name="acessoRef">
+                        <input type="text" class="form-control" id="acessoRef" name="acessoRef" required >
                     </div>
                 </div>
                 
@@ -121,7 +121,7 @@
                                                     <!-- CDO REFERÊNCIA -->
                     <div class="col-sm-12 col-md-6 div-inp">
                         <label for="cdoRef" class="bg-danger">INFORME CDO DE REFERÊNCIA</label>
-                        <input type="text" class="form-control" id="cdoRef" name="cdoRef">
+                        <input type="text" class="form-control" id="cdoRef" name="cdoRef" required >
                     </div>
                                  
                     <div class="col-sm-12 col-md-6  div-inp">
@@ -148,7 +148,7 @@
                                                     <!-- ESCOLHA DA ÁREA QUE VAI FAZER A TRATATIVA -->
                     <div class="col-sm-12 col-md-12 div-inp">
                         <label for="equipeVistoria" class="bg-danger">EQUIPE QUE VAI EXECUTAR A VISTORIA</label>
-                        <select class="form-select form-select-lg mb-3" name="equipeVistoria" aria-label=".form-select-lg example">
+                        <select class="form-select form-select-lg mb-3" name="equipeVistoria" aria-label=".form-select-lg example" required >
                             <option selected>Escolha a área</option>
                             <option value="MANUTENÇÃO">MANUTENÇÃO</option>
                             <option value="HOME CONNECT">HOME CONNECT</option>

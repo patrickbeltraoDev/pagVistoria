@@ -47,6 +47,15 @@
         <link rel="stylesheet" href="./css/styleVistoriaManutencao.css">
 
         <script type="text/javascript">
+
+
+            $('input[name="escolha"]').change(function () {
+                if ($('input[name="escolha"]:checked').val() == "sim") {
+                    $('#sim2').attr("checked", "sim");
+                } else {
+                    $('#sim2').attr("checked", "nao");
+                }
+            });
             
             $('input[name="escolha2"]').change(function () {
                 if ($('input[name="escolha2"]:checked').val() == "sim") {
@@ -190,7 +199,7 @@
                                             <div class="article-form">
                                                 <div>
                                                     <label for="sim1">SIM</label>
-                                                    <input type="radio" name="escolha" id="sim1" value="sim">
+                                                    <input type="radio" name="escolha" id="sim1" value="sim" checked>
                                                 </div>
                                                 <div>
                                                     <label for="nao1">NÃO</label>
@@ -240,17 +249,17 @@
                                             </div>
                                             <div class="imagens">
                                                 <div class="upload">
-                                                    <label class="" for="img1">INSIRA UMA FOTO <img src="../imagem/camera.png" alt=""></label>
+                                                    <label class="" for="img1">INSIRA UMA FOTO - ANTES<img src="../imagem/camera.png" alt=""></label>
                                                     <input type="file" id="img1" name="img1">
                                                     
                                                 </div>
                                                 <div class="upload">
-                                                    <label class="" for="img2">INSIRA UMA FOTO <img src="../imagem/camera.png" alt=""></label>
+                                                    <label class="" for="img2">INSIRA UMA FOTO - DEPOIS<img src="../imagem/camera.png" alt=""></label>
                                                     <input type="file" id="img2" name="img2">
                                                     
                                                 </div>
                                                 <div class="upload">
-                                                    <label class="" for="img3">INSIRA UMA FOTO <img src="../imagem/camera.png" alt=""></label>
+                                                    <label class="" for="img3">INSIRA UMA FOTO - DEPOIS<img src="../imagem/camera.png" alt=""></label>
                                                     <input type="file" id="img3" name="img3">
                                                 </div>
                                             </div>

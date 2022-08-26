@@ -38,7 +38,7 @@ $data = date('d-m-Y');
 if (!empty($_POST['data_fiscalizacao_i'])) {
     $inicio =  $_POST['data_fiscalizacao_i'];
     $fim =  $_POST['data_fiscalizacao_f'];
-    $filtro_date = "AND f.dt_arquivo between '$inicio' AND '$fim'";
+    $filtro_date = "AND dataCadastro between '$inicio' AND '$fim'";
 }else{
     if (isset($data)) {
         $dia = date('d-m-Y');
@@ -46,7 +46,7 @@ if (!empty($_POST['data_fiscalizacao_i'])) {
         // sete dias anterior de atividades INST e REP
         $inicio = date('Y-m-d', strtotime('-2 day', strtotime($dia)));
         $fim = date('Y-m-d');
-        $filtro_date = "AND f.dt_arquivo between '$inicio' AND '$fim'";
+        $filtro_date = "AND dataCadastro between '$inicio' AND '$fim'";
     }
 }
 
@@ -122,14 +122,17 @@ if (isset($_POST['status'])) {
     <body>
         <form method="post" id="filtro">
             <div class="row">
-                <div class="filter-date">
-                    <label for="data_fiscalizacao_i">Data inicial:</label>
-                    <input style="width: 115px; height:30px;" type="date" name="data_fiscalizacao_i" value="<? echo $inicio ?>"
-                        id="data_fiscalizacao_i" onChange=" document.getElementById('filtro').submit();">
-
-                    <label for="data_fiscalizacao_f">Data final:</label>
-                    <input style="width: 115px; height:30px;" type="date" name="data_fiscalizacao_f" value="<? echo $fim ?>"
+                <div class="date">
+                    <div class="div-date">
+                        <label for="data_fiscalizacao_i">Data inicial:</label>
+                        <input style="width: 115px; height:30px;" type="date" name="data_fiscalizacao_i" value="<? echo $inicio ?>"
+                            id="data_fiscalizacao_i" onChange=" document.getElementById('filtro').submit();">
+                    </div>
+                    <div class="div-date">
+                        <label for="data_fiscalizacao_f">Data final:</label>
+                        <input style="width: 115px; height:30px;" type="date" name="data_fiscalizacao_f" value="<? echo $fim ?>"
                         id="data_fiscalizacao_f" onChange=" document.getElementById('filtro').submit();">
+                    </div>
                 </div>
                 <div class="other-filter">
                         <!-- --------------------////////////////     FILTRO UF    /////////////////------------------------------------->
@@ -269,7 +272,7 @@ if (isset($_POST['status'])) {
                 <tbody>
 
                     <?php
-                        $sql = "SELECT * FROM pci.vistoria where status <> '' $filtro_uf $filtro_cidade $filtro_cdoRef $filtro_acessoRef $filtro_problema $filtro_status
+                        $sql = "SELECT * FROM pci.vistoria where status <> '' $filtro_uf $filtro_cidade $filtro_cdoRef $filtro_acessoRef $filtro_problema $filtro_status $filtro_date
                         AND (equipeVistoria = 'MANUTENÇÃO' AND status = 'a tratar') or (equipeVistoria = 'MANUTENÇÃO' AND status = 'pendente')";
                         $qr = mysql_query($sql);
                         while ($res = mysql_fetch_assoc($qr)){
@@ -295,7 +298,7 @@ if (isset($_POST['status'])) {
                                 }                            
                             ?>
                             <td style="margin: auto; padding: 0; margin: 0;">
-                                <button type="submit" style="width: 100%; height: 40px;" id="btn-img"
+                                <button type="button" style="width: 100%; height: 40px;" id="btn-img"
                                     name="visualizar_imagens" value="<?php echo $res['id']?>"
                                     class="btn btn-xs btn-primary" data-toggle="modal"
                                     data-target="#myModalvizualizar" onClick='botaoOKM(<?php echo $res['id']?>)'>

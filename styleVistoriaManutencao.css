@@ -18,13 +18,21 @@ thead tr{
     color: #fff;
 }
 
-.align-v{
-    display: table-cell;
-    vertical-align: middle;
+.table > tbody > tr > td{
+    text-align: center;
+    padding: 0;
+    margin: 0;
+}
+
+button{
+    width: 100%; 
+    height: 40px;
+    margin: 0;
+    
 }
 
 
-/* CSS DO MODAL DA FILA DE TRATARIVAS */
+/* CSS DO MODAL DA FILA DE TRATATIVAS */
 
 .container{
     width: 100%;

@@ -147,7 +147,7 @@
                 <div class="row" style="margin-top: 20px">
                                                     <!-- ESCOLHA DA ÁREA QUE VAI FAZER A TRATATIVA -->
                     <div class="col-sm-12 col-md-12 div-inp">
-                        <label for="equipeVistoria" class="bg-danger">ÁREA QUE VAI EXECUTAR A VISTORIA</label>
+                        <label for="equipeVistoria" class="bg-danger">EQUIPE QUE VAI EXECUTAR A VISTORIA</label>
                         <select class="form-select form-select-lg mb-3" name="equipeVistoria" aria-label=".form-select-lg example">
                             <option selected>Escolha a área</option>
                             <option value="MANUTENÇÃO">MANUTENÇÃO</option>

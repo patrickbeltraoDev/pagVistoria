@@ -117,11 +117,11 @@ foreach (@$db->query($sql1) as $row) {
                             }                            
                         ?>
                         <td>
-                            <button type="submit" style="width: 65px; height: 35px;" id="btn-img"
+                            <button type="submit" id="btn-img"
                                 name="visualizar_imagens" value="<?php echo $res['id']?>"
                                 class="btn btn-xs btn-primary" data-toggle="modal"
                                 data-target="#myModalvizualizar" onClick='botaoOKH(<?php echo $res['id']?>)'>
-                                Imagens
+                                Visualizar
                             </button>
                         </td>
                         

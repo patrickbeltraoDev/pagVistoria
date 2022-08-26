@@ -50,10 +50,10 @@ foreach (@$db->query($sql1) as $row) {
         <title>Visualizar Fila de Tratativas</title>
 
         <script type="text/javascript">
-            function botaoOKM(id){  
+            function botaoOKH(id){  
                 var validar_os = $('#validar_os').val();
             $.ajax({
-                url : "./modalTratativaManut.php",
+                url : "./modalTratativaHome.php",
                 type : 'post',
                 dataType : 'html',
                 data : {acao: 'modalTabela', id: id}, 
@@ -92,7 +92,7 @@ foreach (@$db->query($sql1) as $row) {
             <tbody>
 
                 <?php
-                    $sql = "SELECT * FROM pci.vistoria where (equipeVistoria = 'MANUTENÇÃO' AND status = 'a tratar') or (equipeVistoria = 'MANUTENÇÃO' AND status = 'pendente');";
+                    $sql = "SELECT * FROM pci.vistoria where (equipeVistoria = 'HOME CONNECT' AND status = 'a tratar') or (equipeVistoria = 'HOME CONNECT' AND status = 'pendente');";
                     $qr = mysql_query($sql);
                     while ($res = mysql_fetch_assoc($qr)){
                 ?>
@@ -109,7 +109,7 @@ foreach (@$db->query($sql1) as $row) {
                         <?php 
                             switch ($res['status']) {
                                 case 'a tratar':  
-                                    echo '<td class="bg-a-tratar" style="display: table-cell; vertical-align: middle;"><strong>A TRATAR</strong></td>';
+                                    echo '<td class="bg-a-tratar " style="display: table-cell; vertical-align: middle;"><strong>A TRATAR</strong></td>';
                                 break;
                                 case 'pendente':    
                                     echo '<td class="bg-pendente" style="display: table-cell; vertical-align: middle;"><strong>PENDENTE</strong></td>';
@@ -120,7 +120,7 @@ foreach (@$db->query($sql1) as $row) {
                             <button type="submit" style="width: 65px; height: 35px;" id="btn-img"
                                 name="visualizar_imagens" value="<?php echo $res['id']?>"
                                 class="btn btn-xs btn-primary" data-toggle="modal"
-                                data-target="#myModalvizualizar" onClick='botaoOKM(<?php echo $res['id']?>)'>
+                                data-target="#myModalvizualizar" onClick='botaoOKH(<?php echo $res['id']?>)'>
                                 Imagens
                             </button>
                         </td>
@@ -141,9 +141,7 @@ foreach (@$db->query($sql1) as $row) {
                         </button>
                     </div>
                     <div id="imagens-modal">
-
-
-                        
+  
                     </div> 
                 </div>
                 <div class="modal-footer">
@@ -158,6 +156,12 @@ foreach (@$db->query($sql1) as $row) {
         <!-- < ?php   
             desconectar($db);
         ?> -->
+
+
+
+
+        
+
 
 
         <!-- <script src="./css/js/bootstrap.bundle.min.js"></script>     -->

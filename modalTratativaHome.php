@@ -172,7 +172,7 @@
                                 </div> 
 
                                 <div class="header">
-                                    <h1>Tratativa da Vistoria</h1>
+                                    <h1>TRATATIVA DA VISTORIA - HOME CONNECT</h1>
                                 </div>
 
                                                 <!-- INÍCIO - FORMULÁRIO -->
@@ -241,17 +241,17 @@
                                             <div class="imagens">
                                                 <div class="upload">
                                                     <label class="" for="img1">INSIRA UMA FOTO <img src="../imagem/camera.png" alt=""></label>
-                                                    <input type="file" id="img1" name="img1" required>
+                                                    <input type="file" id="img1" name="img1">
                                                     
                                                 </div>
                                                 <div class="upload">
                                                     <label class="" for="img2">INSIRA UMA FOTO <img src="../imagem/camera.png" alt=""></label>
-                                                    <input type="file" id="img2" name="img2" required>
+                                                    <input type="file" id="img2" name="img2">
                                                     
                                                 </div>
                                                 <div class="upload">
                                                     <label class="" for="img3">INSIRA UMA FOTO <img src="../imagem/camera.png" alt=""></label>
-                                                    <input type="file" id="img3" name="img3" required>
+                                                    <input type="file" id="img3" name="img3">
                                                 </div>
                                             </div>
 
@@ -294,6 +294,7 @@
                 foreach (@$db->query($sql3) as $row) {
                 if($row['validacao'] == 3){$validacao = 5; } else {$validacao = 1;}
                 }
+            
             
                 $array= array();
                 $sql3 = "UPDATE pci.tbl_auditoria_ativ set validacao=$validacao, dt_justi=now(), auditor_just='$tr'  WHERE id = $validar_os; ";
@@ -341,7 +342,7 @@
                     
                     $.ajax({
         
-                        url: 'backManutVistoria.php', 
+                        url: 'backHomeVistoria.php', 
                         type: 'POST',
                         data: formDados,
                         cache: false,
@@ -357,7 +358,7 @@
                             $('#filtro').each(function() {
                                 alert('DADOS INSERIDOS COM SUCESSO!!!');
                                 this.reset();
-                                window.setTimeout("location.href='TratativasVistoria.php';",
+                                window.setTimeout("location.href='tratativasVistoriaHome.php';",
                                     2000);
                             });
                         },

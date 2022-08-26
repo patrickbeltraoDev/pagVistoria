@@ -5,6 +5,24 @@ thead tr{
     border-bottom: 2px solid #444;
 }
 
+.bg-a-tratar{
+    background-color: #f5b507;
+    text-align: center;
+    font-weight: bold;
+}
+
+.bg-pendente{
+    background-color: #9b2020;
+    text-align: center;
+    font-weight: bold;
+    color: #fff;
+}
+
+.align-v{
+    display: table-cell;
+    vertical-align: middle;
+}
+
 
 /* CSS DO MODAL DA FILA DE TRATARIVAS */
 
@@ -143,3 +161,4 @@ input[type="file"]{
     height: 20px;
     margin-left: 10px;
 }
+

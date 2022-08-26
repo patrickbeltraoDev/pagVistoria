@@ -28,7 +28,6 @@ if (isset($_POST['acao']) && $_POST['acao'] == "cadastrar") {
 }
 
 
-
 $tr = $_POST['tr'];
 $nome = $_POST['nome'];
 $idVistoria = $_POST['idVistoria'];
@@ -48,8 +47,26 @@ $sql = "INSERT INTO pci.vistoriaManutencao (tr, nome, localizadaFalha, localizad
     VALUES ('$tr', '$nome', '$locFalha', '$locOportunidade', '$oportEncontrada', 
     '$evidencia1', '$evidencia2', '$evidencia3', '$data_importacao', '$idVistoria')";
 
-
 $qr = mysql_query($sql) or die(mysql_error("ERRO AO INSERIR!"));
+
+if($locFalha == 'nao' && $locOportunidade =='nao'){
+	$sql2 = "UPDATE pci.vistoria status = 'nao atuou' where id = $idVistoria";
+	$qr2 = mysql_query($sql2) or die(mysql_error("ERRO AO INSERIR!"));
+}
+
+
+if($oportEncontrada == 1 || $oportEncontrada = 2){
+	$sql2 = "UPDATE pci.vistoria status = 'tratada' where id = $idVistoria";
+	$qr2 = mysql_query($sql2) or die(mysql_error("ERRO AO INSERIR!"));
+}elseif($oportEncontrada == 3 || $oportEncontrada == 4){
+	$sql2 = "UPDATE pci.vistoria status = 'pendente' where id = $idVistoria";
+	$qr2 = mysql_query($sql2) or die(mysql_error("ERRO AO INSERIR!"));
+}
+
+
+
+
+
 
 
 

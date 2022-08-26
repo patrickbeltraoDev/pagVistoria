@@ -54,7 +54,7 @@
                     $('#upload-img').show();
                 } else {
                     $('#opEncontrada').hide();
-                    $('#opEncontrada').hide();
+                    $('#upload-img').hide();
                 }
             });
             

@@ -52,12 +52,12 @@ thead tr{
 
 .div-date > label{
     margin-right: 5px;
-    font-size: 1.2em;
+    font-size: 1.1em;
     font-weight: bold;
 }
 
 .div-date  input{
-    font-size: 1.4em;
+    font-size: 1.2em;
     font-weight: bold;
 }
 
@@ -203,3 +203,36 @@ input[type="file"]{
     margin-left: 10px;
 }
 
+
+ /* CSS RELATORIO   */
+
+
+.card-info{
+    background-color: #fff;
+}
+
+.main-relatorio{
+    background-color: rgb(196, 194, 194);
+}
+
+.card-body, .card-header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(48, 47, 47);
+    font-weight: bold;
+}
+
+.card-body{
+    font-size: 1.4em;
+}
+
+.card-header{
+    background-color: #fd4356cc;
+    font-size: 1.2em;
+    text-align: center;
+}
+
+.card{
+    box-shadow: 2px 2px 7px #444;
+}

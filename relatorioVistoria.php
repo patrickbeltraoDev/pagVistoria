@@ -80,27 +80,50 @@ if (isset($_POST['status'])) {
                 // --------- GRÁFICOS -------------
 
 //  -----------QUANTIDADE A TRATAR MANUTENÇÃO -------------
-$sql7 = "SELECT count(id) as qtdManutAtratar where equipeVistoria = 'MANUTENÇÃO' and status = 'a tratar'";
+$sql7 = "SELECT count(id) as qtdManutAtratar from pci.vistoria where equipeVistoria = 'MANUTENÇÃO' and status = 'a tratar'";
 $qr7 = mysql_query($sql7);
 while($res7 = mysql_fetch_assoc($qr7)) {
     $qtdManutAtratar = $res7['qtdManutAtratar'];
 }
 
 //  -----------QUANTIDADE TRATADOS MANUTENÇÃO -------------
-$sql8 = "SELECT count(id) as qtdManutTratada where equipeVistoria = 'MANUTENÇÃO' and status = 'tratada'";
+$sql8 = "SELECT count(id) as qtdManutTratada from pci.vistoria where equipeVistoria = 'MANUTENÇÃO' and status = 'tratada'";
 $qr8 = mysql_query($sql8);
 while($res8 = mysql_fetch_assoc($qr8)) {
     $qtdManutTratada = $res8['qtdManutTratada'];
 }
 
 //  -----------QUANTIDADE PENDENTES MANUTENÇÃO -------------
-$sql9 = "SELECT count(id) as qtdManutPendente where equipeVistoria = 'MANUTENÇÃO' and status = 'pendente'";
+$sql9 = "SELECT count(id) as qtdManutPendente from pci.vistoria where equipeVistoria = 'MANUTENÇÃO' and status = 'pendente'";
 $qr9 = mysql_query($sql9);
 while($res9 = mysql_fetch_assoc($qr9)) {
     $qtdManutPendente = $res9['qtdManutPendente'];
 }
 
+//  -----------QUANTIDADE A TRATAR HOME CONNECT -------------
+$sql10 = "SELECT count(id) as qtdHomeTratar from pci.vistoria where equipeVistoria = 'HOME CONNECT' and status = 'a tratar'";
+$qr10 = mysql_query($sql10);
+while($res10 = mysql_fetch_assoc($qr10)) {
+    $qtdHomeTratar = $res10['qtdHomeTratar'];
+}
+
+//  -----------QUANTIDADE TRATADOS HOME CONNECT -------------
+$sql11 = "SELECT count(id) as qtdHomeTratadas from pci.vistoria where equipeVistoria = 'HOME CONNECT' and status = 'tratada'";
+$qr11 = mysql_query($sql11);
+while($res11 = mysql_fetch_assoc($qr11)) {
+    $qtdHomeTratadas = $res11['qtdHomeTratadas'];
+}
+
+//  -----------QUANTIDADE PENDENTES HOME CONNECT-------------
+$sql12 = "SELECT count(id) as qtdHomePendentes from pci.vistoria where equipeVistoria = 'HOME CONNECT' and status = 'pendente'";
+$qr12 = mysql_query($sql12);
+while($res12 = mysql_fetch_assoc($qr12)) {
+    $qtdHomePendentes = $res12['qtdHomePendentes'];
+}
+
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -116,6 +139,7 @@ while($res9 = mysql_fetch_assoc($qr9)) {
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200&display=swap" rel="stylesheet">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
         <title>Relatório Vistoria de Rede</title>
 
         
@@ -224,14 +248,20 @@ while($res9 = mysql_fetch_assoc($qr9)) {
                 </div>
                 <div class="main-relatorio container col-12">
                     <div class="row">
-                        <div class="card text-bg-primary m-3">
-                            <canvas id="chartManut"></canvas>
+                        <div class="card text-bg-primary m-3 col-4">
+                            <div class="title-card">Relatório Equipe Manutenção</div>
+                            <canvas id="chartManut" ></canvas>
+                        </div>
+                        <div class="card text-bg-primary m-3 col-4">
+                            <div class="title-card">Relatório Equipe Home Connect</div>
+                            <canvas id="chartHome" ></canvas>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
+                                     <!-- GRÁFICO -- 'RELATÓRIO EQUIPE MANUTENÇÃO' -->
         <script>
             const ctx = document.getElementById('chartManut').getContext('2d');
             const myChart = new Chart(ctx, {
@@ -239,54 +269,92 @@ while($res9 = mysql_fetch_assoc($qr9)) {
                 data: {
                     labels: ['Cadastro', 'A tratar', 'Tratadas', 'Pendentes'],
                     datasets: [{
-                        label: 'RELATÓRIO EQUIPE MANUTENÇÃO',
-                        data: [$qtdManut, $qtdManutAtratar, $qtdManutTratada, $qtdManutPendente],
+                        // label: 'RELATÓRIO EQUIPE MANUTENÇÃO',
+                        data: [<?php echo $qtdManut?>,<?php echo $qtdManutAtratar?>, <?php echo $qtdManutTratada?>, <?php echo $qtdManutPendente?>],
                         backgroundColor: [
                             'rgba(54, 162, 235, 0.2)',
                             'rgba(255, 99, 132, 0.2)',
                             'rgba(75, 192, 192, 0.2)',
-                            'rgba(255, 206, 86, 0.2)',
-                            
+                            'rgba(255, 206, 86, 0.2)'
                         ],
                         borderColor: [
                             'rgba(54, 162, 235, 1)',
                             'rgba(255, 99, 132, 1)',
                             'rgba(75, 192, 192, 1)',
-                            'rgba(255, 206, 86, 1)',
-                           
+                            'rgba(255, 206, 86, 1)'
                         ],
-                        borderWidth: 1
+                        borderWidth: 1,
+                        datalabels: {
+                            align: 'start',
+                            anchor: 'end'
+                        }
                     }]
                 },
                 options: {
                     scales: {
-                        y: {
-                            beginAtZero: true
+                            x: {
+                                grid: {
+                                display: false
+                                }
+                            },
+                            y: {
+                                display: false,
+                                grid: {display: false}
+                            }
                         }
-                    }
-                }
+                },
+                plugins: [ChartDataLabels],
+                
             });
         </script>
 
-        <!-- <script>
-            const ctx2 = document.getElementById('myChart2').getContext('2d');
+                            <!-- GRÁFICO -- 'RELATÓRIO EQUIPE HOME CONNECT' -->
+        <script>
+            const ctx2 = document.getElementById('chartHome').getContext('2d');
             const myChart2 = new Chart(ctx2, {
-               type: 'line',
-               data: {
-                    labels: ['< ?php echo $qtdManut ?>'],
+                type: 'bar',
+                data: {
+                    labels: ['Cadastro', 'A tratar', 'Tratadas', 'Pendentes'],
                     datasets: [{
-                        label: "Quantidade de cadastros Manut",
-                        data: [0, < ?php echo $qtdManut?>],
-                        borderWidth: 6, 
-                        borderColor: 'rgba(77,166,253,0.85)',
-                        backgroundColor: 'transparent',
+                        
+                        data: [<?php echo $qtdHome?>,<?php echo $qtdHomeTratar?>, <?php echo $qtdHomeTratadas?>, <?php echo $qtdHomePendentes?>],
+                        backgroundColor: [
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(255, 206, 86, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(255, 206, 86, 1)'
+                        ],
+                        borderWidth: 1,
+                        datalabels: {
+                            align: 'start',
+                            anchor: 'end'
+                        }
                     }]
-               } 
-                
+                },
+                options: {
+                    
+                    scales: {
+                        x: {
+                            grid: {
+                            display: false
+                            }
+                        },
+                        y: {
+                            display: false,
+                            grid: {display: false}
+                        }
+                        }
+                },
+                plugins: [ChartDataLabels],
             });
             
-            
-        </script> -->
+        </script>
 
 
         

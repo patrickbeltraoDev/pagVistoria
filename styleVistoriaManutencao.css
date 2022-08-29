@@ -235,4 +235,13 @@ input[type="file"]{
 
 .card{
     box-shadow: 2px 2px 7px #444;
+    padding: 0;
+}
+
+.title-card{
+    font-size: 1.2em;
+    padding: 5px;
+    font-weight: bold;
+    background-color: #fd435670;
+    width: 100%;
 }

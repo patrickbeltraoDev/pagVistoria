@@ -7,7 +7,7 @@
 ini_set("display_errors", 0);
 include_once('../conexao/conectar.php');
 include_once('../funcao/funcoes_jean.php');
-include_once('./redimensiona_oportunidades.php');
+include_once('./redimensionaVistoria.php');
 header('Content-Type: text/html; charset=utf-8');
 
 
@@ -43,9 +43,9 @@ $data_importacao = date('Y-m-d H:i:s');
 
 
 $sql = "INSERT INTO pci.vistoriaManutencao (tr, nome, localizadaFalha, localizadaOportunidade, oportunidadeEncontrada, 
-    foto1, foto2, foto3, dataTratativa, idVistoria)
+    foto1, foto2, foto3, dataTratativa, idVistoria, equipe)
     VALUES ('$tr', '$nome', '$locFalha', '$locOportunidade', '$oportEncontrada', 
-    '$evidencia1', '$evidencia2', '$evidencia3', '$data_importacao', '$idVistoria')";
+    '$evidencia1', '$evidencia2', '$evidencia3', '$data_importacao', '$idVistoria', 'HOME CONNECT')";
 
 $qr = mysql_query($sql) or die(mysql_error("ERRO AO INSERIR!"));
 

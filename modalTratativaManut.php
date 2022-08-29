@@ -8,7 +8,7 @@
     include_once('../funcao/dias.php');
     include_once('../funcao/converte_letras.php');
     include_once('../funcao/funcoes_jean.php'); 
-    include_once('../redimensiona.php');
+    include_once('./redimensionaVistoria.php');
     
     $db = new PDO($dsn, $dbuser, $dbpass, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
 
@@ -184,13 +184,16 @@
                                     <h1>TRATATIVA DA VISTORIA - MANUTENÇÃO</h1>
                                 </div>
 
+
                                                 <!-- INÍCIO - FORMULÁRIO -->
-                                <form action="#" method="post" id="filtro">
+                                <form method="POST" id="filtroModal">
                                     <div style="display: none;">
                                         <input type="text" name="tr" value="<?php echo $usr_matricula_oi?>">
                                         <input type="text" name="nome" value="<?php echo $usr_nome?>">
                                         <input type="text" name="idVistoria" value="<?php echo $id?>">
                                     </div>
+
+                                    
                                     <div class="main center">
                                         <div class="info">
                                             <div class="head">
@@ -266,11 +269,12 @@
 
                                         </div>
 
-                                        <div align='center' style='padding: 10px' class='form-group col-md-12 grid21'>
-                                            <button align='center' id='btn' type='submit' style='width: 345px' class='btn btn-success btn-lg'
-                                            value='Enviar'>ENVIAR</button>
-                                            <input type='hidden' name='acao' value='cadastrar'>
+                                        <div align="center" style="padding: 10px" class="form-group col-md-12">
+                                            <button align="center" id="btn" type="submit" style="width: 345px" class="btn btn-success btn-lg"
+                                            value="Enviar">ENVIAR</button>
+                                            <input type="hidden" name="acao" value="cadastrar">
                                         </div>
+                                        <p id="resultado">  </p> 
 
                                     </div>
                                 </form>
@@ -342,12 +346,20 @@
 
 
         <script type="text/javascript">
+            
+            $(document).ready(function() {
+                $('#example').DataTable();
+            });
+
             $(function() {
 
-                $('#filtro').submit(function(event) {
+                $('#filtroModal').submit(function(event) {
                     event.preventDefault();
                     var formDados = new FormData($(this)[0]);
                     alert('AGUARDE !!! EM PROCESSAMENTO !!!');
+                    $('#resultado').html(
+                                '<div class="alert alert-danger col-md-12" role="alert"><h2>AGUARDE !!! EM PROCESSAMENTO !!!</h2></div>'
+                                );
                     
                     $.ajax({
         
@@ -360,11 +372,11 @@
                         success: function(data) {
                         //console.log(data);
                             $('#resultado').html(
-                                ''
+                                ""
                                 );
                             $('.recebe').html(data);
                             
-                            $('#filtro').each(function() {
+                            $('#filtroModal').each(function() {
                                 alert('DADOS INSERIDOS COM SUCESSO!!!');
                                 this.reset();
                                 window.setTimeout("location.href='tratativasVistoria.php';",
@@ -379,8 +391,8 @@
         </script>
 
 
-        <script type="text/javascript" src="./js/controle_ftth.js"></script>
-        <script type="text/javascript" src="pci/tim/js/jquery.min.js"></script>
+        <!-- <script type="text/javascript" src="./js/controle_ftth.js"></script> -->
+        <script type="text/javascript" src="../js/jquery.min.js"></script>
         <script type="text/javascript" src="./js/aud_controle_validacao.js"></script>
     </body>
 </html>

@@ -8,7 +8,7 @@
     include_once('../funcao/dias.php');
     include_once('../funcao/converte_letras.php');
     include_once('../funcao/funcoes_jean.php'); 
-    include_once('../redimensiona.php');
+    include_once('./redimensionaVistoria.php');
     
     $db = new PDO($dsn, $dbuser, $dbpass, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
 
@@ -184,7 +184,7 @@
                                 </div>
 
                                                 <!-- INÍCIO - FORMULÁRIO -->
-                                <form action="#" method="post" id="filtro">
+                                <form method="post" id="filtroModal">
                                     <div style="display: none;">
                                         <input type="text" name="tr" value="<?php echo $usr_matricula_oi?>">
                                         <input type="text" name="nome" value="<?php echo $usr_nome?>">
@@ -343,7 +343,7 @@
         <script type="text/javascript">
             $(function() {
 
-                $('#filtro').submit(function(event) {
+                $('#filtroModal').submit(function(event) {
                     event.preventDefault();
                     var formDados = new FormData($(this)[0]);
                     alert('AGUARDE !!! EM PROCESSAMENTO !!!');
@@ -363,7 +363,7 @@
                                 );
                             $('.recebe').html(data);
                             
-                            $('#filtro').each(function() {
+                            $('#filtroModal').each(function() {
                                 alert('DADOS INSERIDOS COM SUCESSO!!!');
                                 this.reset();
                                 window.setTimeout("location.href='tratativasVistoriaHome.php';",
@@ -378,8 +378,8 @@
         </script>
 
 
-        <script type="text/javascript" src="./js/controle_ftth.js"></script>
-        <script type="text/javascript" src="pci/tim/js/jquery.min.js"></script>
+        <!-- <script type="text/javascript" src="./js/controle_ftth.js"></script> -->
+        <script type="text/javascript" src="../js/jquery.min.js"></script>
         <script type="text/javascript" src="./js/aud_controle_validacao.js"></script>
     </body>
 </html>

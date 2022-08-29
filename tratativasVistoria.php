@@ -6,7 +6,7 @@ include_once('../conexao/config.php');
 include_once('../conexao/conectar.php');
 include_once('../funcao/funcoes_jean.php');
 include_once('../conexao/conectar.php');
-include_once('redimensiona.php');
+include_once('./redimensionaVistoria.php');
 header('Content-Type: text/html; charset=utf-8');
 
 
@@ -89,7 +89,7 @@ if (isset($_POST['status'])) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="css/bootstrap-toggle.min.css" rel="stylesheet">
         <script type="text/javascript" src="../js/bootstrap4-toggle.min.js"></script>
-        <script type="text/javascript" src="./js/jquery.min.js"></script>
+        <script type="text/javascript" src="../js/jquery.min.js"></script>
         <link rel="stylesheet" href="./css/styleVistoriaManutencao.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

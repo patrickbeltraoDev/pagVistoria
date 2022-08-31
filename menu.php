@@ -95,6 +95,8 @@ if ($exibe_permissoes)
                                     <li><a href="../o&m/painel_indicadores_contratuais.php">IND. AGENDAMENTO EFICÁCIA</a></li>
                                     <li><a href="../o&m/visao_reparo_aberto.php">REPAROS ABERTOS (IG)</a></li>
                                     <li><a href="../o&m/visao_reparo_aberto_new.php">REPAROS ABERTOS 2022 (IG)</a></li>
+                                     <li><a href="../o&m/calda_longa.php">CALDA LONGA</a></li>
+                                 
                                     <li><a href="../o&m/indicadores_contratuais_nv_v2.php">NOVO FI </a></li>
                                     <li><a href="../o&m/indicadores_contratuais_nv_v2020.php">NOVO FI 2020</a></li>
                                     <li><a href="../o&m/indicadores_geral.php">RANKING</a></li>
@@ -188,10 +190,13 @@ if ($exibe_permissoes)
                                                 <li><a href="../ftth/vistoriaRede.php">CADASTRO</a></li>
                                             </ul>
                                             <ul>
-                                                <li><a href="../ftth/TratativasVistoria.php">ACOMPANHAMENTO - MANUTENÇÃO</a></li>
+                                                <li><a href="../ftth/tratativasVistoria.php">ACOMPANHAMENTO - MANUTENÇÃO</a></li>
                                             </ul>
                                             <ul>
-                                                <li><a href="../ftth/TratativasVistoriaHome.php">ACOMPANHAMENTO - HOMECONNECT</a></li>
+                                                <li><a href="../ftth/tratativasVistoriaHome.php">ACOMPANHAMENTO - HOMECONNECT</a></li>
+                                            </ul>
+                                            <ul>
+                                                <li><a href="../ftth/relatorioVistoria.php">RELATÓRIO</a></li>
                                             </ul>
                                         </li>
 

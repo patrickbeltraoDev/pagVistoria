@@ -30,7 +30,7 @@ foreach (@$db->query($sql1) as $row) {
     $cargo = $row['cargo'];
 }
 
-// FILTROS
+// FILTROS --
 
 
 $data = date('d-m-Y');
@@ -39,6 +39,7 @@ if (!empty($_POST['data_fiscalizacao_i'])) {
     $inicio =  $_POST['data_fiscalizacao_i'];
     $fim =  $_POST['data_fiscalizacao_f'];
     $filtro_date = "AND dataCadastro between '$inicio' AND '$fim'";
+    $fil_date = "AND m.dataTratativa between '$inicio' AND '$fim'";
 }else{
     if (isset($data)) {
         $dia = date('d-m-Y');
@@ -47,7 +48,7 @@ if (!empty($_POST['data_fiscalizacao_i'])) {
         $inicio = date('Y-m-d', strtotime('-2 day', strtotime($dia)));
         $fim = date('Y-m-d');
         $filtro_date = "AND dataCadastro between '$inicio' AND '$fim'";
-        $fil_date = "AND m.dataCadastro between '$inicio' AND '$fim'";
+        $fil_date = "AND m.dataTratativa between '$inicio' AND '$fim'";
     }
 }
 
@@ -653,7 +654,7 @@ while($res4 = mysql_fetch_assoc($qr4)) {
             <?php 
                 $labelOp = [];
                 $qtdOp = [];
-                $sql14 = "SELECT count(m.oportunidadeEncontrada) as qtdOportunidade, m.oportunidadeEncontrada, t.problema,
+                $sql14 = "SELECT count(m.oportunidadeEncontrada) as qtdOportunidade, m.oportunidadeEncontrada, m.dataTratativa, t.problema,
                             v.uf, v.cidade, v.cdoRef, v.acessoRef, v.status
                             from pci.vistoriaManutencao as m
                             left join pci.vistoriaTratativa as t on t.id = m.oportunidadeEncontrada

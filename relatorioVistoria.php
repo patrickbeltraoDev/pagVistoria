@@ -121,6 +121,22 @@ while($res12 = mysql_fetch_assoc($qr12)) {
     $qtdHomePendentes = $res12['qtdHomePendentes'];
 }
 
+
+
+                        
+//  -----------QUANTIDADE PARA OS GRÁFICOS -------------
+$sql3 = "SELECT count(id) as qtdManut from pci.vistoria where equipeVistoria = 'MANUTENÇÃO'";
+$qr3 = mysql_query($sql3);
+while($res3 = mysql_fetch_assoc($qr3)) {
+   $qtdManut = $res3['qtdManut'];
+}
+ 
+$sql4 = "SELECT count(id) as qtdHome from pci.vistoria where equipeVistoria = 'HOME CONNECT'";
+$qr4 = mysql_query($sql4);
+while($res4 = mysql_fetch_assoc($qr4)) {
+   $qtdHome = $res4['qtdHome'];
+} 
+
 ?>
 
 
@@ -140,12 +156,13 @@ while($res12 = mysql_fetch_assoc($qr12)) {
         <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200&display=swap" rel="stylesheet">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.1.0/chartjs-plugin-datalabels.min.js"></script> -->
         <title>Relatório Vistoria de Rede</title>
 
         
 
     </head>
-    <body>
+    <body onresize="responsiveFonts()">
                                         <!-- FINAL - FILTRO -->
 
         <div class="container-fluid">
@@ -163,7 +180,7 @@ while($res12 = mysql_fetch_assoc($qr12)) {
             <div class="main-relatorio container col-12">
                 <div class="">
                     <div class="row ">
-                        <div class="card text-bg-primary m-3" style="max-width: 18rem;">
+                        <div class="cards cadastro text-bg-primary m-3" style="max-width: 18rem;">
                             <?php 
                                 $sql2 = "SELECT count(id) as qtdCadastros from pci.vistoria";
                                 $qr2 = mysql_query($sql2);
@@ -171,15 +188,19 @@ while($res12 = mysql_fetch_assoc($qr12)) {
                                    $qtdCadastros = $res2['qtdCadastros'];
                                 }
                             ?>
-                            <div class="p-3 card-body">
+                            
+                            <div class="icon">
+                                <img src="../imagem/registro.png">
+                            </div>
+                            <div class="card-body">
                                 <?php echo $qtdCadastros ?>
                             </div>
-                            <div class="p-2 card-header ">
-                                <p>Vistorias [Cadastradas]</p>
+                            <div class="subtitle">
+                                <p>Total - Cadastros</p>
                             </div>
                         </div>
 
-                        <div class="card text-bg-primary m-3" style="max-width: 18rem;">
+                        <div class="cards aTratar text-bg-primary m-3" style="max-width: 18rem;">
                             <?php 
                                 $sql5 = "SELECT count(id) as qtdAtratar from pci.vistoria where status = 'a tratar'";
                                 $qr5 = mysql_query($sql5);
@@ -187,15 +208,37 @@ while($res12 = mysql_fetch_assoc($qr12)) {
                                    $qtdAtratar = $res5['qtdAtratar'];
                                 }
                             ?>
-                            <div class="p-3 card-body">
+                            <div class="icon">
+                                <img src="../imagem/alvo.png">
+                            </div>
+                            <div class="card-body">
                                 <?php echo $qtdAtratar ?>
                             </div>
-                            <div class="p-2 card-header ">
-                                <p>Vistorias [A Tratar]</p>
+                            <div class="subtitle">
+                                <p>Total - A Tratar</p>
                             </div>
                         </div>
 
-                        <div class="card text-bg-primary m-3" style="max-width: 18rem;">
+                        <div class="cards tratados text-bg-primary m-3" style="max-width: 18rem;">
+                            <?php 
+                                $sqlTratada = "SELECT count(id) as qtdTratados from pci.vistoria where status = 'tratada'";
+                                $qrTratada = mysql_query($sqlTratada);
+                                while($resTratada = mysql_fetch_assoc($qrTratada)) {
+                                   $qtdTratados = $resTratada['qtdTratados'];
+                                }
+                            ?>
+                            <div class="icon">
+                                <img src="../imagem/servico.png">
+                            </div>
+                            <div class="card-body">
+                                <?php echo $qtdTratados ?>
+                            </div>
+                            <div class="subtitle">
+                                <p>Total - Tratados</p>
+                            </div>
+                        </div>
+
+                        <div class="cards pendentes text-bg-primary m-3" style="max-width: 18rem;">
                             <?php 
                                 $sql6 = "SELECT count(id) as qtdPendente from pci.vistoria where status = 'pendente'";
                                 $qr6 = mysql_query($sql6);
@@ -203,58 +246,38 @@ while($res12 = mysql_fetch_assoc($qr12)) {
                                    $qtdPendente   = $res6['qtdPendente'];
                                 }
                             ?>
-                            <div class="p-3 card-body">
+                            <div class="icon">
+                                <img src="../imagem/teste.png">
+                            </div>
+                            <div class="card-body">
                                 <?php echo $qtdPendente ?>
                             </div>
-                            <div class="p-2 card-header ">
-                                <p>Vistorias [Pendentes]</p>
+                            <div class="subtitle">
+                                <p>Total - Pendentes</p>
                             </div>
                         </div>
-
-                        <div class="card text-bg-primary m-3" style="max-width: 18rem;">
-                            <?php 
-                                $sql3 = "SELECT count(id) as qtdManut from pci.vistoria where equipeVistoria = 'MANUTENÇÃO'";
-                                $qr3 = mysql_query($sql3);
-                                while($res3 = mysql_fetch_assoc($qr3)) {
-                                   $qtdManut = $res3['qtdManut'];
-                                }
-                            ?>
-                            <div class="p-3 card-body">
-                                <?php echo $qtdManut ?>
-                            </div>
-                            <div class="p-2 card-header ">
-                                <p>Vistorias [Manutenção]</p>
-                            </div>
-                        </div>
-
-                        <div class="card text-bg-primary m-3" style="max-width: 18rem;">
-                            <?php 
-                                $sql4 = "SELECT count(id) as qtdHome from pci.vistoria where equipeVistoria = 'HOME CONNECT'";
-                                $qr4 = mysql_query($sql4);
-                                while($res4 = mysql_fetch_assoc($qr4)) {
-                                   $qtdHome = $res4['qtdHome'];
-                                }
-                            ?>
-                            <div class="p-3 card-body">
-                                <?php echo $qtdHome ?>
-                            </div>
-                            <div class="p-2 card-header ">
-                                <p>Vistorias [Home Connect]</p>
-                            </div>
-                        </div>
-
-                        
+                
                     </div>
                 </div>
                 <div class="main-relatorio container col-12">
                     <div class="row">
-                        <div class="card text-bg-primary m-3 col-4">
+                        <div class="card text-bg-primary m-3 col-5">
                             <div class="title-card">Relatório Equipe Manutenção</div>
                             <canvas id="chartManut" ></canvas>
                         </div>
-                        <div class="card text-bg-primary m-3 col-4">
+                        <div class="card text-bg-primary m-3 col-5">
                             <div class="title-card">Relatório Equipe Home Connect</div>
                             <canvas id="chartHome" ></canvas>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="card text-bg-primary m-3 col-5">
+                            <div class="title-card">Problemas Ofensores</div>
+                            <canvas id="chartOfensores"></canvas>
+                        </div>
+                        <div class="card text-bg-primary m-3 col-5">
+                            <div class="title-card">Oportunidades Encontradas</div>
+                            <canvas id="chartOportunidade"></canvas>
                         </div>
                     </div>
                 </div>
@@ -272,10 +295,10 @@ while($res12 = mysql_fetch_assoc($qr12)) {
                         // label: 'RELATÓRIO EQUIPE MANUTENÇÃO',
                         data: [<?php echo $qtdManut?>,<?php echo $qtdManutAtratar?>, <?php echo $qtdManutTratada?>, <?php echo $qtdManutPendente?>],
                         backgroundColor: [
-                            'rgba(54, 162, 235, 0.2)',
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(75, 192, 192, 0.2)',
-                            'rgba(255, 206, 86, 0.2)'
+                            'rgba(54, 162, 235)',
+                            'rgba(255, 99, 132)',
+                            'rgba(75, 192, 192)',
+                            'rgba(255, 206, 86)'
                         ],
                         borderColor: [
                             'rgba(54, 162, 235, 1)',
@@ -286,22 +309,36 @@ while($res12 = mysql_fetch_assoc($qr12)) {
                         borderWidth: 1,
                         datalabels: {
                             align: 'start',
-                            anchor: 'end'
+                            anchor: 'end',
+                            color: 'black',
+                            font: {
+                                weight: 'bold',
+                                size: 18
+                            }
                         }
                     }]
                 },
                 options: {
                     scales: {
-                            x: {
-                                grid: {
-                                display: false
-                                }
-                            },
-                            y: {
-                                display: false,
-                                grid: {display: false}
+                        x: {
+                            grid: {
+                            display: false
                             }
+                        },
+                        y: {
+                            display: false,
+                            grid: {display: false}
                         }
+                    },
+                    plugins: {
+                        //remove a legenda da parte superior do gráfico
+                        legend: {
+                            display: false      
+                        },
+                    }, 
+                    layout: {
+                        padding: 20
+                    }
                 },
                 plugins: [ChartDataLabels],
                 
@@ -319,26 +356,30 @@ while($res12 = mysql_fetch_assoc($qr12)) {
                         
                         data: [<?php echo $qtdHome?>,<?php echo $qtdHomeTratar?>, <?php echo $qtdHomeTratadas?>, <?php echo $qtdHomePendentes?>],
                         backgroundColor: [
-                            'rgba(54, 162, 235, 0.2)',
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(75, 192, 192, 0.2)',
-                            'rgba(255, 206, 86, 0.2)'
+                            'rgba(54, 163, 235)',
+                            'rgba(255, 99, 132)',
+                            'rgba(75, 192, 192)',
+                            'rgba(255, 206, 86)'
                         ],
                         borderColor: [
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 99, 132, 1)',
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(255, 206, 86, 1)'
+                            'rgba(54, 162, 235)',
+                            'rgba(255, 99, 132)',
+                            'rgba(75, 192, 192)',
+                            'rgba(255, 206, 86)'
                         ],
                         borderWidth: 1,
                         datalabels: {
                             align: 'start',
-                            anchor: 'end'
+                            anchor: 'end',
+                            color: 'black',
+                            font: {
+                                weight: 'bold',
+                                size: 18
+                            }
                         }
                     }]
                 },
                 options: {
-                    
                     scales: {
                         x: {
                             grid: {
@@ -349,11 +390,290 @@ while($res12 = mysql_fetch_assoc($qr12)) {
                             display: false,
                             grid: {display: false}
                         }
-                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false      
+                        },
+                    },
+                    layout: {
+                        padding: 20
+                    }
                 },
                 plugins: [ChartDataLabels],
             });
             
+        </script>
+
+
+
+        <!-- GRÁFICO -- 'RELATÓRIO + OFENSORES VISTORIA' -->
+        <script>
+
+            <?php 
+                $label = [];
+                $qtd = [];
+                $sql13 = "SELECT count(problema) as qtdProblema, problema from pci.vistoria group by problema order by qtdProblema DESC";
+                $qr13 = mysql_query($sql13);
+                while($res13 = mysql_fetch_assoc($qr13)) {
+                    $qtdProblema = $res13['qtdProblema'];
+                    $problemas = $res13['problema'];
+
+                    $sep = substr($problemas, 0, strlen($problemas)/2);
+                    $sep2 = substr($problemas, strlen($problemas)/2);
+
+                    $label[] = "['{$sep}','{$sep2}']";
+
+                    // CONSULTA DO TOTAL PARA A PORCENTAGEM
+                    $sqlP2 = "SELECT count(problema) as total from pci.vistoria";
+                    $qrP2 = mysql_query($sqlP2);
+                    while($resP2 = mysql_fetch_assoc($qrP2)) {
+                        $total2 = $resP2['total'];
+                    }
+
+                    $porc2 = (($qtdProblema * 100)/$total2); 
+
+                    $qtd[] = $porc2;
+                }
+
+                $labels = implode(",", $label);    
+                $qtds = implode(",", $qtd);
+            ?>
+            
+            
+            // setup 
+            const data = {
+                    labels: [
+                        <?php echo $labels?>
+                    ],
+                    datasets: [{
+                        // label: 'Weekly Sales',
+                        data: [<?php echo $qtds?>],
+                        backgroundColor: [
+                        'rgba(255, 99, 132)',
+                        'rgba(54, 162, 235)',
+                        'rgba(255, 206, 86)',
+                        'rgba(75, 192, 192)',
+                        'rgba(153, 102, 255)',
+                        'rgba(255, 159, 64)',
+                        'rgba(0, 0, 0, 0.2)'
+                        ],
+                        borderColor: [
+                        'rgba(54, 162, 235)',
+                        'rgba(54, 162, 235)',
+                        'rgba(255, 206, 86)',
+                        'rgba(75, 192, 192)',
+                        'rgba(153, 102, 255)',
+                        'rgba(255, 159, 64)',
+                        'rgba(0, 0, 0, 1)'
+                        ],
+                        borderWidth: 1,
+                        barPercentage: 0.75,
+                        categoryPercentage: 1,
+                        datalabels: {
+                            align: 'start',
+                            anchor: 'end',
+                            color: 'black',
+                            font: {
+                                weight: 'bold'
+                            }
+                        },
+                    }]
+                    
+            };
+            
+                const config = {
+                    type: 'bar',
+                    data,
+                    options: {
+                        indexAxis: 'y',
+                        scales: {
+                            x: {
+                                display: false,
+                                grid: {display: false}
+                            },
+                            y: {
+                                beginAtZero: true,
+                                grid: {display: false}
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                display: false      
+                            },
+                            datalabels:{
+                                formatter: (value, context) => {
+                                    const valor = context.chart.data.datasets[0].data;
+                                    const percentageValue = [`${value}%`];
+                                    return percentageValue;
+                                }
+                            }
+                        },
+                        layout: {
+                            padding: 20
+                        },
+                        
+                    },
+                    plugins: [ChartDataLabels],
+                };
+
+                // Chart.defaults.font.size = 8;  ---> faz com que todas as fontes dos gráficos fique desse tamanho.
+                
+                // render init block
+                const chartOfensores = new Chart(
+                document.getElementById('chartOfensores'),
+                config
+                );
+
+        </script>
+
+
+            <!-- GRÁFICO -- 'RELATÓRIO + OFENSORES VISTORIA' -->
+        
+        <script>
+            <?php 
+                $labelOp = [];
+                $qtdOp = [];
+                $sql14 = "SELECT count(m.oportunidadeEncontrada) as qtdOportunidade, m.oportunidadeEncontrada, t.problema
+                            from pci.vistoriaManutencao as m
+                            left join pci.vistoriaTratativa as t on t.id = m.oportunidadeEncontrada
+                            group by oportunidadeEncontrada order by qtdOportunidade DESC";
+                $qr14 = mysql_query($sql14);
+                while($res14 = mysql_fetch_assoc($qr14)) {
+                    $qtdOpEncontrada = $res14['qtdOportunidade'];
+                    $OpEncontradas = $res14['problema'];
+
+                    $sepOp1 = substr($OpEncontradas, 0, strlen($OpEncontradas)/2);
+                    $sepOp2 = substr($OpEncontradas, strlen($OpEncontradas)/2);
+
+                    $labelOp[] = "['{$sepOp1}','{$sepOp2}']";
+
+                        // CONSULTA DO TOTAL PARA A PORCENTAGEM
+                    $sqlP1 = "SELECT count(oportunidadeEncontrada) as total from pci.vistoriaManutencao";
+                    $qrP1 = mysql_query($sqlP1);
+                    while($resP1 = mysql_fetch_assoc($qrP1)) {
+                        $total = $resP1['total'];
+                    }
+
+                    $porc1 = (($qtdOpEncontrada * 100)/$total); 
+
+                    $qtdOp[] = $porc1;
+
+                }
+
+                
+
+                $labels_Op = implode(",", $labelOp);    
+                $qtds_Op = implode(",", $qtdOp);
+            ?>
+
+            // setup 
+            const dataOp = {
+                    labels: [
+                        <?php echo $labels_Op?>
+                    ],
+                    datasets: [{
+                        // label: 'Weekly Sales',
+                        data: [<?php echo  $qtds_Op?>],
+                        backgroundColor: [
+                        'rgba(255, 99, 132)',
+                        'rgba(54, 162, 235)',
+                        'rgba(255, 206, 86)',
+                        'rgba(75, 192, 192)',
+                        'rgba(153, 102, 255)',
+                        'rgba(255, 159, 64)',
+                        'rgba(0, 0, 0, 0.2)'
+                        ],
+                        borderColor: [
+                        'rgba(54, 162, 235)',
+                        'rgba(54, 162, 235)',
+                        'rgba(255, 206, 86)',
+                        'rgba(75, 192, 192)',
+                        'rgba(153, 102, 255)',
+                        'rgba(255, 159, 64)',
+                        'rgba(0, 0, 0, 1)'
+                        ],
+                        borderWidth: 1,
+                        barPercentage: 0.75,
+                        categoryPercentage: 1,
+                        datalabels: {
+                            align: 'start',
+                            anchor: 'end',
+                            color: 'black',
+                            font: {
+                                weight: 'bold'
+                            }
+                        },
+                    }]
+                    
+            };
+            
+                const config2 = {
+                    type: 'bar',
+                    data: dataOp,
+                    options: {
+                        indexAxis: 'y',
+                        scales: {
+                            x: {
+                                display: false,
+                                grid: {display: false}
+                            },
+                            y: {
+                                beginAtZero: true,
+                                grid: {display: false}
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                display: false      
+                            },
+                            datalabels:{
+                                formatter: (value, context) => {
+                                    const valor = context.chart.data.datasets[0].data;
+                                    const percentageValue = [`${value}%`];
+                                    return percentageValue;
+                                }
+                            }
+                        },
+                        layout: {
+                            padding: 20
+                        },
+                        
+                    },
+                    plugins: [ChartDataLabels],
+                };
+
+                // Chart.defaults.font.size = 8;  ---> faz com que todas as fontes dos gráficos fique desse tamanho.
+                
+                // render init block
+                const chartOportunidade = new Chart(
+                document.getElementById('chartOportunidade'),
+                config2
+                );
+
+
+
+        </script>
+
+        <script>
+            function responsiveFonts(){
+                if(window.outerWidth > 1400){
+                    Chart.defaults.font.size = 16;
+                    Chart.defaults.font.weight = 'bold';
+                };
+                if(window.outerWidth < 1400 && window.outerWidth > 333){
+                    Chart.defaults.font.size = 12;
+                    Chart.defaults.font.weight = 'bold';
+                };
+                if(window.outerWidth < 333){
+                    Chart.defaults.font.size = 8;
+                    Chart.defaults.font.weight = 'bold';
+                };
+
+                chartOfensores.update();
+                myChart2.update();
+                myChart.update();
+            }
         </script>
 
 

@@ -212,36 +212,80 @@ input[type="file"]{
 }
 
 .main-relatorio{
-    background-color: rgb(196, 194, 194);
+    background-color: #f1f4f6;
 }
 
-.card-body, .card-header{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: rgb(48, 47, 47);
-    font-weight: bold;
-}
-
-.card-body{
-    font-size: 1.4em;
-}
-
-.card-header{
-    background-color: #fd4356cc;
-    font-size: 1.2em;
-    text-align: center;
-}
 
 .card{
     box-shadow: 2px 2px 7px #444;
-    padding: 0;
+    padding: 0; 
 }
+
+.cards{
+    box-shadow: 2px 2px 7px #444;
+    padding: 5px; 
+    min-width: 170px; 
+    border-radius: 3px;
+
+}
+
+.cadastro{
+    background: radial-gradient(rgb(120, 192, 240), rgba(54, 162, 235));
+}
+.aTratar{
+    background: radial-gradient(rgb(241, 136, 159), rgba(255, 99, 132));
+}
+.tratados{
+    background: radial-gradient(rgb(115, 224, 224), rgba(75, 192, 192));
+}
+.pendentes{
+    background: radial-gradient(rgb(252, 223, 152), rgba(255, 206, 86));
+}
+/* .aTratar{
+    background: radial-gradient(rgb(241, 136, 159), rgba(255, 99, 132));
+} */
+
+
+.icon{
+    height: 40%;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+
+.icon > img{
+    width: 45px;
+    height:45px;
+    filter: invert(100%);
+}
+
+.subtitle{
+    font-size: 1em;
+    color: #fff;
+    padding: 10px;
+    font-weight: bold;
+    text-align: center;
+}
+
+
+.card-body{
+    font-size: 2em;
+    font-weight: 700;
+    font-family: 'Oswald', sans-serif;
+    color: #fff;
+    padding: 5px;
+    text-align: center;
+}
+
+
+
 
 .title-card{
     font-size: 1.2em;
     padding: 5px;
     font-weight: bold;
-    background-color: #fd435670;
+    /* background-color: #fd435670; */
+    border-bottom: 1px solid #444;
     width: 100%;
 }
+

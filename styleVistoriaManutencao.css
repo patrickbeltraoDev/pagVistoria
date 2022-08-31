@@ -36,7 +36,7 @@ thead tr{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    background-color: #ddd;
+    background-color: #f2f7fb;
 }
 
 .date{
@@ -208,7 +208,7 @@ input[type="file"]{
 
 .dash-header{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 .title > h1{
@@ -219,7 +219,7 @@ input[type="file"]{
 
 .exportar{
     font-family: 'Oswald', sans-serif;
-    margin-right: 50px;
+    margin-right: 20px;
     display: flex;
 }
 
@@ -231,7 +231,7 @@ input[type="file"]{
 }
 
 .exportar-title > span{
-    font-size: 1.3em;
+    font-size: 1.2em;
     font-weight: bold;
     
 }
@@ -242,8 +242,8 @@ input[type="file"]{
 }
 
 .exportar-img img{
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
 }
 
 .card-info{
@@ -251,7 +251,7 @@ input[type="file"]{
 }
 
 .main-relatorio{
-    background-color: #f3f3f3;
+    background-color: #f2f7fb;
     font-family: 'Oswald', sans-serif;
 }
 
@@ -316,15 +316,61 @@ input[type="file"]{
     text-align: center;
 }
 
-
-
-
 .title-card{
     font-size: 1.2em;
     padding: 5px;
     font-weight: bold;
-    background-color: #ddd;
-    border-bottom: 1px solid #444;
+    /* background-color: #ddd; */
+    border-bottom: 1px solid #ddd;
     width: 100%;
 }
 
+ /* --------- FILTROS -------------- */
+.filtros{
+    border: 1px solid #444;
+    border-radius: 3px;
+}
+
+.dropdown-menu > li > a {
+    color: #000;
+    font-weight: bold;
+    font-size: 1.4em;
+
+}
+
+.bootstrap-select > .dropdown-toggle.bs-placeholder, 
+.bootstrap-select > .dropdown-toggle.bs-placeholder:hover, 
+.bootstrap-select > .dropdown-toggle.bs-placeholder:focus, 
+.bootstrap-select > .dropdown-toggle.bs-placeholder:active{
+    font-size: 12px;
+    color: #000;
+    font-weight: bold;
+}
+
+
+.form-filter{
+    display: flex;
+    padding: 5px;
+    justify-content: center;
+    background-color: #dc3545;
+}
+
+.other-filter{
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+
+.dropdown-toggle::after {
+    display: none;
+}
+
+
+.bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
+    width: 150px;
+    margin-right: 3px;
+}
+
+.filter-date{
+    margin-right: 5px;
+}

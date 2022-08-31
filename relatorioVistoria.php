@@ -47,75 +47,78 @@ if (!empty($_POST['data_fiscalizacao_i'])) {
         $inicio = date('Y-m-d', strtotime('-2 day', strtotime($dia)));
         $fim = date('Y-m-d');
         $filtro_date = "AND dataCadastro between '$inicio' AND '$fim'";
+        $fil_date = "AND m.dataCadastro between '$inicio' AND '$fim'";
     }
 }
+
 
 if (isset($_POST['uf'])) {
     $uf = implode("','", $_REQUEST['uf']);
     $filtro_uf = "AND uf IN('$uf')";
+    $fil_uf = "AND v.uf IN('$uf')"; // filtro extra criado para atender o ultimo gráfico, pois o mesmo usa método de pesquisa diferente dos demais.
 }
 
 if (isset($_POST['cidade'])) {
     $cidade = implode("','", $_REQUEST['cidade']);
     $filtro_cidade = "AND cidade IN('$cidade')";
+    $fil_cidade = "AND v.cidade IN('$cidade')";
 }
 
 if (isset($_POST['cdoRef'])) {
     $cdoRef = implode("','", $_REQUEST['cdoRef']);
     $filtro_cdoRef = "AND cdoRef IN('$cdoRef')";
+    $fil_cdoRef = "AND v.cdoRef IN('$cdoRef')";
 }
 if (isset($_POST['acessoRef'])) {
     $acessoRef = implode("','", $_REQUEST['acessoRef']);
     $filtro_acessoRef = "AND  acessoRef IN('$acessoRef')";
+    $fil_acessoRef = "AND v.acessoRef IN('$acessoRef')";
 }
-if (isset($_POST['problema'])) {
-    $problema = implode("','", $_REQUEST['problema']);
-    $filtro_problema = "AND problema IN('$problema')";
-}
+
 if (isset($_POST['status'])) {
     $status = implode("','", $_REQUEST['status']);
-    $filtro_status = "AND status IN('$status')";
+    $fil_status = "AND v.status IN('$status')";
 }
 
                 // --------- GRÁFICOS -------------
 
 //  -----------QUANTIDADE A TRATAR MANUTENÇÃO -------------
-$sql7 = "SELECT count(id) as qtdManutAtratar from pci.vistoria where equipeVistoria = 'MANUTENÇÃO' and status = 'a tratar'";
+$sql7 = "SELECT count(id) as qtdManutAtratar from pci.vistoria where equipeVistoria = 'MANUTENÇÃO' and status = 'a tratar'  $filtro_date $filtro_uf $filtro_cidade $filtro_cdoRef $filtro_acessoRef $filtro_status";
 $qr7 = mysql_query($sql7);
 while($res7 = mysql_fetch_assoc($qr7)) {
     $qtdManutAtratar = $res7['qtdManutAtratar'];
 }
 
 //  -----------QUANTIDADE TRATADOS MANUTENÇÃO -------------
-$sql8 = "SELECT count(id) as qtdManutTratada from pci.vistoria where equipeVistoria = 'MANUTENÇÃO' and status = 'tratada'";
+$sql8 = "SELECT count(id) as qtdManutTratada from pci.vistoria where equipeVistoria = 'MANUTENÇÃO' and status = 'tratada'  $filtro_date $filtro_uf $filtro_cidade $filtro_cdoRef $filtro_acessoRef $filtro_status";
 $qr8 = mysql_query($sql8);
 while($res8 = mysql_fetch_assoc($qr8)) {
     $qtdManutTratada = $res8['qtdManutTratada'];
 }
 
 //  -----------QUANTIDADE PENDENTES MANUTENÇÃO -------------
-$sql9 = "SELECT count(id) as qtdManutPendente from pci.vistoria where equipeVistoria = 'MANUTENÇÃO' and status = 'pendente'";
+$sql9 = "SELECT count(id) as qtdManutPendente from pci.vistoria where equipeVistoria = 'MANUTENÇÃO' and status = 'pendente'  $filtro_date $filtro_uf $filtro_cidade $filtro_cdoRef $filtro_acessoRef $filtro_status";
 $qr9 = mysql_query($sql9);
 while($res9 = mysql_fetch_assoc($qr9)) {
     $qtdManutPendente = $res9['qtdManutPendente'];
 }
 
 //  -----------QUANTIDADE A TRATAR HOME CONNECT -------------
-$sql10 = "SELECT count(id) as qtdHomeTratar from pci.vistoria where equipeVistoria = 'HOME CONNECT' and status = 'a tratar'";
+$sql10 = "SELECT count(id) as qtdHomeTratar from pci.vistoria where equipeVistoria = 'HOME CONNECT' and status = 'a tratar'  $filtro_date $filtro_uf $filtro_cidade $filtro_cdoRef $filtro_acessoRef $filtro_status";
 $qr10 = mysql_query($sql10);
 while($res10 = mysql_fetch_assoc($qr10)) {
     $qtdHomeTratar = $res10['qtdHomeTratar'];
 }
 
 //  -----------QUANTIDADE TRATADOS HOME CONNECT -------------
-$sql11 = "SELECT count(id) as qtdHomeTratadas from pci.vistoria where equipeVistoria = 'HOME CONNECT' and status = 'tratada'";
+$sql11 = "SELECT count(id) as qtdHomeTratadas from pci.vistoria where equipeVistoria = 'HOME CONNECT' and status = 'tratada'  $filtro_date $filtro_uf $filtro_cidade $filtro_cdoRef $filtro_acessoRef $filtro_status";
 $qr11 = mysql_query($sql11);
 while($res11 = mysql_fetch_assoc($qr11)) {
     $qtdHomeTratadas = $res11['qtdHomeTratadas'];
 }
 
 //  -----------QUANTIDADE PENDENTES HOME CONNECT-------------
-$sql12 = "SELECT count(id) as qtdHomePendentes from pci.vistoria where equipeVistoria = 'HOME CONNECT' and status = 'pendente'";
+$sql12 = "SELECT count(id) as qtdHomePendentes from pci.vistoria where equipeVistoria = 'HOME CONNECT' and status = 'pendente'  $filtro_date $filtro_uf $filtro_cidade $filtro_cdoRef $filtro_acessoRef $filtro_status";
 $qr12 = mysql_query($sql12);
 while($res12 = mysql_fetch_assoc($qr12)) {
     $qtdHomePendentes = $res12['qtdHomePendentes'];
@@ -125,13 +128,14 @@ while($res12 = mysql_fetch_assoc($qr12)) {
 
                         
 //  -----------QUANTIDADE PARA OS GRÁFICOS -------------
-$sql3 = "SELECT count(id) as qtdManut from pci.vistoria where equipeVistoria = 'MANUTENÇÃO'";
+$sql3 = "SELECT count(id) as qtdManut from pci.vistoria where equipeVistoria = 'MANUTENÇÃO' $filtro_date $filtro_uf $filtro_cidade $filtro_cdoRef $filtro_acessoRef $filtro_status";
 $qr3 = mysql_query($sql3);
 while($res3 = mysql_fetch_assoc($qr3)) {
    $qtdManut = $res3['qtdManut'];
 }
+
  
-$sql4 = "SELECT count(id) as qtdHome from pci.vistoria where equipeVistoria = 'HOME CONNECT'";
+$sql4 = "SELECT count(id) as qtdHome from pci.vistoria where equipeVistoria = 'HOME CONNECT' $filtro_date $filtro_uf $filtro_cidade $filtro_cdoRef $filtro_acessoRef $filtro_status";
 $qr4 = mysql_query($sql4);
 while($res4 = mysql_fetch_assoc($qr4)) {
    $qtdHome = $res4['qtdHome'];
@@ -158,38 +162,144 @@ while($res4 = mysql_fetch_assoc($qr4)) {
         <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
         <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.1.0/chartjs-plugin-datalabels.min.js"></script> -->
         <title>Relatório Vistoria de Rede</title>
-
-        
-
     </head>
     <body onresize="responsiveFonts()">
-                                        <!-- FINAL - FILTRO -->
 
-        <div class="container-fluid">
-            <div class="container col-12">
-                <div class="dash-header">
-                    <div class="title">
-                        <h1>Vistoria de Rede - FTTH</h1>
-                    </div>
-                    <div class="exportar">
-                        <div class="exportar-title">
-                            <span>Exportar</span>
-                        </div>
-                        <div class="exportar-img">
-                            <a href="#">
-                                <img src="../imagem/icone_excel.png" alt="">
-                            </a>
-                        </div>
-                    </div>
+        <!-- <div class="container col-12">
+            <div class="dash-header">
+                <div class="title">
+                    <h1>Vistoria de Rede - FTTH</h1>
+                </div>
+                
+            </div>
+        </div> -->
+
+            <!-- ----------INICIO DOS FILTROS ----------- -->
+        <form method="post" id="filtro" class="form-filter">
+            <div class="filters">  
+                <div class="filter-date">
+                    <label for="data_fiscalizacao_i">Data inicial:</label>
+                    <input style="width: 115px; height:30px;" type="date" name="data_fiscalizacao_i" value="<? echo $inicio ?>"
+                        id="data_fiscalizacao_i" onChange=" document.getElementById('filtro').submit();">
+
+                    <label for="data_fiscalizacao_f">Data final:</label>
+                    <input style="width: 115px; height:30px;" type="date" name="data_fiscalizacao_f" value="<? echo $fim ?>"
+                        id="data_fiscalizacao_f" onChange=" document.getElementById('filtro').submit();">
                 </div>
             </div>
+
+            <!-- --------------------////////////////     FILTRO UF    /////////////////------------------------------------->
+            <div class="other-filter">
+                <?php
+                    $sql_uf = "SELECT uf FROM pci.vistoria group by uf order by uf ASC";
+                    $query_uf = mysql_query($sql_uf) or die(error_msg(mysql_error(), $sql_uf));
+                    while ($result_uf = mysql_fetch_assoc($query_uf)) {
+                        $v_filtros['uf'][] = $result_uf['uf'];
+                    }
+                    foreach ($v_filtros['uf'] as $key) {
+                        $ar = $tag_filtros['uf'] .= "<option value='$key' " . (in_array($key, $_REQUEST['uf']) ? 'selected' : '') . ">$key</option>";
+                    } 
+                ?>
+                <select name='uf[]' class="selectpicker filtros"  multiple title="UF" 
+                    data-selected-text-format="count" data-actions-box="true" id="f_uf" 
+                    onChange=" document.getElementById('filtro').submit();">
+                    <?php echo $tag_filtros['uf']; ?>
+                </select>
+
+                                <!-- --------------------////////////////   CIDADE     /////////////////------------------------------------->
+                <?php
+                    $sql_cidade = "SELECT cidade FROM pci.vistoria group by cidade order by cidade ASC";
+                    $query_cidade = mysql_query($sql_cidade) or die(error_msg(mysql_error(), $sql_cidade));
+                    while ($result_cidade = mysql_fetch_assoc($query_cidade)) {
+                        $v_filtros['cidade'][] = $result_cidade['cidade'];
+                    }
+                    foreach ($v_filtros['cidade'] as $key) {
+                        $tag_filtros['cidade'] .= "<option value='$key' " . (in_array($key, $_REQUEST['cidade']) ? 'selected' : '') . ">$key</option>";
+                    }
+                ?>
+                <select name='cidade[]' class="selectpicker filtros" multiple title="CIDADE"
+                data-selected-text-format="count" data-actions-box="true" id="f_cidade"
+                onChange=" document.getElementById('filtro').submit();">
+                <?php echo $tag_filtros['cidade'];?>
+                </select>
+                            <!-- --------------------////////////////   CDO REFERÊNCIA    /////////////////------------------------------------->       
+                <?php
+                    $sql_cdo = "SELECT cdoRef FROM pci.vistoria group by cdoRef order by cdoRef ASC";
+                    $query_cdo = mysql_query($sql_cdo) or die(error_msg(mysql_error(), $sql_cdo));
+                    while ($result_cdo = mysql_fetch_assoc($query_cdo)) {
+                        $v_filtros['cdoRef'][] = $result_cdo['cdoRef'];
+                    }
+                    foreach ($v_filtros['cdoRef'] as $key) {
+                        $tag_filtros['cdoRef'] .= "<option value='$key' " . (in_array($key, $_REQUEST['cdoRef']) ? 'selected' : '') . ">$key</option>";
+                    }
+                ?>
+                <select name='cdoRef[]' class="selectpicker filtros" multiple title="CDO" data-live-search="false"
+                data-selected-text-format="count" data-actions-box="true" id="f_cdo"
+                onChange=" document.getElementById('filtro').submit();">
+                <?php echo $tag_filtros['cdoRef'];?>
+                </select>
+                            <!-- --------------------////////////////   ACESSO REFERÊNCIA     /////////////////------------------------------------->
+                <?php
+                    $sqlAcessoRef = "SELECT acessoRef FROM pci.vistoria group by acessoRef order by acessoRef ASC";
+                    $queryAcessoRef = mysql_query($sqlAcessoRef ) or die(error_msg(mysql_error(), $sqlAcessoRef ));
+
+                    while ($resultAcessoRef = mysql_fetch_assoc($queryAcessoRef)) {
+                        $v_filtros['acessoRef'][] = $resultAcessoRef['acessoRef'];
+                    }
+
+                    foreach ($v_filtros['acessoRef'] as $key) {
+                        $tag_filtros['acessoRef'] .= "<option value='$key' " . (in_array($key, $_REQUEST['acessoRef']) ? 'selected' : '') . ">$key</option>";
+                    }
+                ?>
+                <select name='acessoRef[]' class="selectpicker filtros" multiple title="ACESSO GPON"
+                data-selected-text-format="count" data-actions-box="true" id="f_acessoRef"
+                onChange=" document.getElementById('filtro').submit();">
+                <?php echo $tag_filtros['acessoRef'];?>
+                </select> 
+
+                            <!-- --------------------////////////////   STATUS     /////////////////------------------------------------->
+                <?php
+                    $sqlStatus = "SELECT status FROM pci.vistoria group by status order by status ASC";
+                    $queryStatus = mysql_query($sqlStatus ) or die(error_msg(mysql_error(), $sqlStatus ));
+
+                    while ($resultStatus = mysql_fetch_assoc($queryStatus)) {
+                        $v_filtros['status'][] = $resultStatus['status'];
+                    }
+
+                    foreach ($v_filtros['status'] as $key) {
+                        $tag_filtros['status'] .= "<option value='$key' " . (in_array($key, $_REQUEST['status']) ? 'selected' : '') . ">$key</option>";
+                    }
+                ?>
+                <select name='status[]' class="selectpicker filtros" multiple title="STATUS"
+                data-selected-text-format="count" data-actions-box="true" id="f_status"
+                onChange=" document.getElementById('filtro').submit();">
+                <?php echo $tag_filtros['status'];?>
+                </select>
+
+                <div class="exportar">
+                    <!-- <div class="exportar-title">
+                        <span>Exportar</span>
+                    </div> -->
+                    <div class="exportar-img">
+                        <a href="#" onclick="exportar()" alt="Exportar">
+                            <img src="../imagem/icone_excel.png" alt="Exportar">
+                        </a>
+                    </div>
+                </div>
+            </div>    
+        </form>       
+                            <!-- FINAL - FILTRO -->
+
+
+        <div class="container-fluid">
+            
 
             <div class="main-relatorio container col-12">
                 <div class="">
                     <div class="row ">
                         <div class="cards cadastro text-bg-primary m-3" style="max-width: 18rem;">
                             <?php 
-                                $sql2 = "SELECT count(id) as qtdCadastros from pci.vistoria";
+                                $sql2 = "SELECT count(id) as qtdCadastros from pci.vistoria where status <> '' $filtro_date $filtro_uf $filtro_cidade $filtro_cdoRef $filtro_acessoRef $filtro_status";
                                 $qr2 = mysql_query($sql2);
                                 while($res2 = mysql_fetch_assoc($qr2)) {
                                    $qtdCadastros = $res2['qtdCadastros'];
@@ -209,7 +319,7 @@ while($res4 = mysql_fetch_assoc($qr4)) {
 
                         <div class="cards aTratar text-bg-primary m-3" style="max-width: 18rem;">
                             <?php 
-                                $sql5 = "SELECT count(id) as qtdAtratar from pci.vistoria where status = 'a tratar'";
+                                $sql5 = "SELECT count(id) as qtdAtratar from pci.vistoria where status = 'a tratar' $filtro_date $filtro_uf $filtro_cidade $filtro_cdoRef $filtro_acessoRef $filtro_status";
                                 $qr5 = mysql_query($sql5);
                                 while($res5 = mysql_fetch_assoc($qr5)) {
                                    $qtdAtratar = $res5['qtdAtratar'];
@@ -228,7 +338,7 @@ while($res4 = mysql_fetch_assoc($qr4)) {
 
                         <div class="cards tratados text-bg-primary m-3" style="max-width: 18rem;">
                             <?php 
-                                $sqlTratada = "SELECT count(id) as qtdTratados from pci.vistoria where status = 'tratada'";
+                                $sqlTratada = "SELECT count(id) as qtdTratados from pci.vistoria where status = 'tratada' $filtro_date $filtro_uf $filtro_cidade $filtro_cdoRef $filtro_acessoRef $filtro_status";
                                 $qrTratada = mysql_query($sqlTratada);
                                 while($resTratada = mysql_fetch_assoc($qrTratada)) {
                                    $qtdTratados = $resTratada['qtdTratados'];
@@ -247,7 +357,7 @@ while($res4 = mysql_fetch_assoc($qr4)) {
 
                         <div class="cards pendentes text-bg-primary m-3" style="max-width: 18rem;">
                             <?php 
-                                $sql6 = "SELECT count(id) as qtdPendente from pci.vistoria where status = 'pendente'";
+                                $sql6 = "SELECT count(id) as qtdPendente from pci.vistoria where status = 'pendente' $filtro_date $filtro_uf $filtro_cidade $filtro_cdoRef $filtro_acessoRef $filtro_status";
                                 $qr6 = mysql_query($sql6);
                                 while($res6 = mysql_fetch_assoc($qr6)) {
                                    $qtdPendente   = $res6['qtdPendente'];
@@ -420,7 +530,8 @@ while($res4 = mysql_fetch_assoc($qr4)) {
             <?php 
                 $label = [];
                 $qtd = [];
-                $sql13 = "SELECT count(problema) as qtdProblema, problema from pci.vistoria group by problema order by qtdProblema DESC";
+                $sql13 = "SELECT count(problema) as qtdProblema, problema from pci.vistoria where problema <> '' $filtro_date $filtro_uf $filtro_cidade $filtro_cdoRef $filtro_acessoRef $filtro_status
+                group by problema order by qtdProblema DESC";
                 $qr13 = mysql_query($sql13);
                 while($res13 = mysql_fetch_assoc($qr13)) {
                     $qtdProblema = $res13['qtdProblema'];
@@ -439,6 +550,7 @@ while($res4 = mysql_fetch_assoc($qr4)) {
                     }
 
                     $porc2 = (($qtdProblema * 100)/$total2); 
+                    $porc2 = number_format($porc2, 0);
 
                     $qtd[] = $porc2;
                 }
@@ -541,9 +653,12 @@ while($res4 = mysql_fetch_assoc($qr4)) {
             <?php 
                 $labelOp = [];
                 $qtdOp = [];
-                $sql14 = "SELECT count(m.oportunidadeEncontrada) as qtdOportunidade, m.oportunidadeEncontrada, t.problema
+                $sql14 = "SELECT count(m.oportunidadeEncontrada) as qtdOportunidade, m.oportunidadeEncontrada, t.problema,
+                            v.uf, v.cidade, v.cdoRef, v.acessoRef, v.status
                             from pci.vistoriaManutencao as m
                             left join pci.vistoriaTratativa as t on t.id = m.oportunidadeEncontrada
+                            left join pci.vistoria as v on v.id = m.idVistoria
+                            where m.oportunidadeEncontrada <> 0 $fil_date $fil_uf $fil_cidade $fil_cdoRef $fil_acessoRef $fil_status
                             group by oportunidadeEncontrada order by qtdOportunidade DESC";
                 $qr14 = mysql_query($sql14);
                 while($res14 = mysql_fetch_assoc($qr14)) {
@@ -563,6 +678,7 @@ while($res4 = mysql_fetch_assoc($qr4)) {
                     }
 
                     $porc1 = (($qtdOpEncontrada * 100)/$total); 
+                    $porc1 = number_format($porc1, 0);
 
                     $qtdOp[] = $porc1;
 
@@ -683,6 +799,23 @@ while($res4 = mysql_fetch_assoc($qr4)) {
             }
         </script>
 
+        <script type="text/javascript">
+
+        function exportar() {
+
+            data_ini_ex = $('#data_fiscalizacao_i').val();
+            data_fim_ex = $('#data_fiscalizacao_f').val();
+            uf_ex = $('#f_uf').val().join("','");
+            cidade_ex = $('#f_cidade').val().join("','");
+            cdo_ex = $('#f_cdo').val().join("','");
+            acesso_ex = $('#f_acessoRef').val().join("','");
+            status_ex = $('#f_status').val().join("','");
+
+            location.href = "arquivoExportar.php?data_i=" + data_ini_ex + "&data_f=" + data_fim_ex + "&uf=" + uf_ex  + "&cidade=" + cidade_ex + "&cdo=" + cdo_ex + "&acesso=" + acesso_ex + "&status=" + status_ex;
+            // console.log(data_ini_ex, data_fim_ex, uf_ex, setor_ex, cidade_ex, cdo_ex, criticidade_ex);
+        }
+
+        </script>
 
         
         <script src="./css/js/bootstrap.bundle.min.js"></script>

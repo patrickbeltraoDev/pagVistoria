@@ -139,7 +139,7 @@ thead tr{
     border-bottom: 1px solid #444;
 }
 
-/* formulario */
+/* ----------- formulario ---------------- */
 
 .article-form{
     padding: 5px;
@@ -204,20 +204,60 @@ input[type="file"]{
 }
 
 
- /* CSS RELATORIO   */
+ /* ------------------ CSS RELATORIO -----------------------   */
 
+.dash-header{
+    display: flex;
+    justify-content: space-between;
+}
+
+.title > h1{
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 2px;
+    font-weight: bold;
+}
+
+.exportar{
+    font-family: 'Oswald', sans-serif;
+    margin-right: 50px;
+    display: flex;
+}
+
+.exportar-title{
+    padding: 3px;
+    margin-right: 3px;
+    display: flex;
+    align-items: center;
+}
+
+.exportar-title > span{
+    font-size: 1.3em;
+    font-weight: bold;
+    
+}
+.exportar-img{
+    padding: 3px;
+    display: flex;
+    align-items: center;
+}
+
+.exportar-img img{
+    width: 40px;
+    height: 40px;
+}
 
 .card-info{
     background-color: #fff;
 }
 
 .main-relatorio{
-    background-color: #f1f4f6;
+    background-color: #f3f3f3;
+    font-family: 'Oswald', sans-serif;
 }
 
 
 .card{
-    box-shadow: 2px 2px 7px #444;
+    box-shadow: 3px 3px 7px #444;
     padding: 0; 
 }
 
@@ -271,7 +311,6 @@ input[type="file"]{
 .card-body{
     font-size: 2em;
     font-weight: 700;
-    font-family: 'Oswald', sans-serif;
     color: #fff;
     padding: 5px;
     text-align: center;
@@ -284,7 +323,7 @@ input[type="file"]{
     font-size: 1.2em;
     padding: 5px;
     font-weight: bold;
-    /* background-color: #fd435670; */
+    background-color: #ddd;
     border-bottom: 1px solid #444;
     width: 100%;
 }

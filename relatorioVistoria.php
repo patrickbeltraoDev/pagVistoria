@@ -166,13 +166,20 @@ while($res4 = mysql_fetch_assoc($qr4)) {
                                         <!-- FINAL - FILTRO -->
 
         <div class="container-fluid">
-            <div class="">
-                <div class="container">
+            <div class="container col-12">
+                <div class="dash-header">
                     <div class="title">
-                        <h1>Main Dashboard</h1>
+                        <h1>Vistoria de Rede - FTTH</h1>
                     </div>
                     <div class="exportar">
-                        exportar
+                        <div class="exportar-title">
+                            <span>Exportar</span>
+                        </div>
+                        <div class="exportar-img">
+                            <a href="#">
+                                <img src="../imagem/icone_excel.png" alt="">
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>

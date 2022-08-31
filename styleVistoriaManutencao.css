@@ -115,6 +115,20 @@ thead tr{
     min-width: 300px;
 }
 
+.info-img{
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    margin: 5px;
+}
+
+.img-modal{
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    box-sizing: border-box;
+}
+
 .head{
     text-align: center;
     font-size: 1.4em;
